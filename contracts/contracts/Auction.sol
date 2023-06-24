@@ -159,15 +159,13 @@ contract Auction is Ownable, IERC165 {
         payable(msg.sender).transfer(withdrawalAmount);
         emit LogWithdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
 
-        // want to call it on tokenboundContract
-        // TODO: check if ERC721 using EIP 165 and transfer
-        IERC165 tokenbound165 = IERC165(address(tokenboundContract));
-        if (tokenbound165.supportsInterface(type(IERC721).interfaceId)) {
+        IERC165 tokenContract165 = IERC165(address(tokenContract));
+        if (tokenContract165.supportsInterface(type(IERC721).interfaceId)) {
             IERC721 token = IERC721(address(tokenContract));
             token.transferFrom(address(this), withdrawalAccount, tokenId);
+        } else {
+            revert("only ERC721 is supported as parent contract");
         }
-
-        // TODO: check if ERC1155
 
         finalized = true;
         return true;
