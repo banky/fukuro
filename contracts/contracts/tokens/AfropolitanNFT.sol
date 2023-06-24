@@ -12,19 +12,21 @@ contract AfropolitanNFT is ERC721URIStorage, Ownable {
     Counters.Counter private _tokenIds;
 
     constructor(
-        string memory _baseURI,
+        string memory _baseURI
     ) ERC721("Afropolitan Citizen", "AFROPOL") {
         setBaseURI(_baseURI);
     }
 
-    function mintNFT(
-        address recipient
-    ) public onlyOwner returns (uint256) {
+    function mintNFT(address recipient) public onlyOwner returns (uint256) {
         _tokenIds.increment();
 
         uint256 newItemId = _tokenIds.current();
         _mint(recipient, newItemId);
-        string tokenURI = string.concat(baseURI, '/', Strings.toString(_tokenIds.current()))
+        string tokenURI = string.concat(
+            baseURI,
+            "/",
+            Strings.toString(_tokenIds.current())
+        );
         _setTokenURI(newItemId, tokenURI);
 
         return newItemId;
