@@ -1,17 +1,30 @@
-'use client'
+"use client";
 
-import { ConnectKitProvider } from 'connectkit'
-import * as React from 'react'
-import { WagmiConfig } from 'wagmi'
+import { ConnectKitProvider } from "connectkit";
+import * as React from "react";
+import { WagmiConfig } from "wagmi";
+import {
+  ApolloClient,
+  InMemoryCache,
+  ApolloProvider,
+  gql,
+} from "@apollo/client";
 
-import { config } from '../wagmi'
+const client = new ApolloClient({
+  uri: "https://api.studio.thegraph.com/query/48907/fukuro/version/latest",
+  cache: new InMemoryCache(),
+});
+
+import { config } from "../wagmi";
 
 export function Providers({ children }: { children: React.ReactNode }) {
-  const [mounted, setMounted] = React.useState(false)
-  React.useEffect(() => setMounted(true), [])
+  const [mounted, setMounted] = React.useState(false);
+  React.useEffect(() => setMounted(true), []);
   return (
-    <WagmiConfig config={config}>
-      <ConnectKitProvider>{mounted && children}</ConnectKitProvider>
-    </WagmiConfig>
-  )
+    <ApolloProvider client={client}>
+      <WagmiConfig config={config}>
+        <ConnectKitProvider>{mounted && children}</ConnectKitProvider>
+      </WagmiConfig>
+    </ApolloProvider>
+  );
 }

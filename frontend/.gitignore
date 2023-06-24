@@ -3,6 +3,7 @@
 # dependencies
 /node_modules
 **/node_modules
+subgraph/erc721/node_modules
 /.pnp
 .pnp.js
 
