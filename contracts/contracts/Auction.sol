@@ -11,7 +11,7 @@ contract Auction is Ownable, IERC165 {
     uint public bidIncrement;
     uint public startBlock;
     uint public endBlock;
-    IERC6551Account public immutable tokenboundContract;
+    address payable public immutable tokenboundAddress;
 
     // ============ STATE ============
     bool public canceled;
@@ -96,7 +96,7 @@ contract Auction is Ownable, IERC165 {
             "Sender must be owner of tokenbound contract"
         );
 
-        tokenboundContract = tokenbound;
+        tokenboundAddress = _tokenboundAddress;
         bidIncrement = _bidIncrement;
         startBlock = _startBlock;
         endBlock = _endBlock;
@@ -152,7 +152,7 @@ contract Auction is Ownable, IERC165 {
             uint256 chainId,
             address tokenContract,
             uint256 tokenId
-        ) = tokenboundContract.token();
+        ) = IERC6551Account(tokenboundAddress).token();
         if (chainId != block.chainid) return false;
 
         fundsByBidder[withdrawalAccount] -= withdrawalAmount;
@@ -160,19 +160,12 @@ contract Auction is Ownable, IERC165 {
         emit LogWithdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
 
         // TODO: check if ERC721 using EIP 165 and transfer
-        // if (
-        //     supportsInterface(
-        //         address(tokenboundContract),
-        //         type(IERC721).interfaceId
-        //     )
-        // ) {
-        //     IERC721 token = IERC721(tokenContract);
-        //     token.transferFrom(address(this), withdrawalAccount, tokenId);
-        // }
+        if (tokenboundAddress.supportsInterface(type(IERC721).interfaceId)) {
+            IERC721 token = IERC721(tokenboundAddress);
+            token.transferFrom(address(this), withdrawalAccount, tokenId);
+        }
 
         // TODO: check if ERC1155
-
-        tokenboundContract.transferFrom(address(this), withdrawalAccount);
 
         finalized = true;
         return true;
@@ -216,6 +209,11 @@ contract Auction is Ownable, IERC165 {
         emit LogWithdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
 
         return true;
+    }
+
+    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+        return (interfaceId == type(IERC165).interfaceId ||
+            interfaceId == type(IERC6551Account).interfaceId);
     }
 
     /* =========== OWNER ONLY FUNCTIONS =========== */
