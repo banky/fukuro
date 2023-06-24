@@ -10,6 +10,8 @@ import "./IERC6551Account.sol";
 contract Curation is IERC165, IERC1271, IERC6551Account {
     receive() external payable {}
 
+    uint256 public nonce;
+
     function executeCall(
         address to,
         uint256 value,
