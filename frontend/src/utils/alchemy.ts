@@ -31,3 +31,13 @@ export const fetchERC721Balances = async (address: string, chainId: number) => {
   const balances = await alchemy.nft.getNftsForOwner(address);
   return balances;
 };
+
+export const getNFTContractDetails = async (
+  address: string,
+  chainId: number
+) => {
+  const alchemy = getAlchemySdk(chainId);
+
+  const contractDetails = await alchemy.nft.getContractMetadata(address);
+  return contractDetails;
+};
