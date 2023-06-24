@@ -31,8 +31,9 @@ contract Curation is IERC165, IERC1271, IERC6551Account {
         // TODO: hardcode the function calldata header, to identify transfer
         // when its a transfer then you flip the bit
 
-        // transfer, safeTranfer, safeTransferFrom, etc a bunch of them
+        // msg sig
 
+        // transfer, safeTranfer, safeTransferFrom, etc a bunch of them
         emit TransactionExecuted(to, value, data);
 
         bool success;
