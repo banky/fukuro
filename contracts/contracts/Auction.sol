@@ -91,10 +91,10 @@ contract Auction is Ownable, IERC165 {
         );
 
         IERC6551Account tokenbound = IERC6551Account(_tokenboundAddress);
-        require(
-            tokenbound.owner() == msg.sender,
-            "Sender must be owner of tokenbound contract"
-        );
+        // require(
+        //     tokenbound.owner() == msg.sender,
+        //     "Sender must be owner of tokenbound contract"
+        // );
 
         tokenboundContract = tokenbound;
         bidIncrement = _bidIncrement;
@@ -170,8 +170,6 @@ contract Auction is Ownable, IERC165 {
         finalized = true;
         return true;
     }
-
-    function testBadCast() public returns (bool success) {}
 
     function withdraw()
         public
