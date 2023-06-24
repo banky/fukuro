@@ -4,7 +4,6 @@ pragma solidity ^0.8.13;
 
 import "./Auction.sol";
 import "openzeppelin-contracts/token/ERC721/IERC721.sol";
-import "openzeppelin-contracts/token/ERC1155/IERC1155.sol";
 
 contract AuctionFactory {
     // ============ STATE ============
@@ -55,9 +54,8 @@ contract AuctionFactory {
 
         IERC165 tokenContract165 = IERC165(tokenContract);
         require(
-            tokenContract165.supportsInterface(type(IERC721).interfaceId) ||
-                tokenContract165.supportsInterface(type(IERC1155).interfaceId),
-            "Not an ERC721 and ERC1155 tokenbound contract"
+            tokenContract165.supportsInterface(type(IERC721).interfaceId),
+            "Not an ERC721 tokenbound contract"
         );
 
         Auction auction = new Auction(
