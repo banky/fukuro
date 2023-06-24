@@ -71,7 +71,7 @@ contract Auction is Ownable, IERC165 {
 
     // ============ CONSTRUCTOR ============
     constructor(
-        uint _bidIncrement,
+        uint _bidIncrement, // TODO: is this in wei or eth
         uint _startBlock,
         uint _endBlock,
         address payable _tokenboundAddress
@@ -116,9 +116,9 @@ contract Auction is Ownable, IERC165 {
         onlyNotOwner
         returns (bool success)
     {
-        require(msg.value != 0, "Bid must be higher than 0");
+        require(msg.value > 0, "Bid must be higher than 0");
         uint newBid = fundsByBidder[msg.sender] + msg.value;
-        require(newBid <= highestBindingBid, "Minimum bid amount not met"); // new bid must out bid binding bid
+        require(newBid > highestBindingBid, "Minimum bid amount not met"); // new bid must out bid binding bid
 
         uint highestBid = fundsByBidder[highestBidder];
         fundsByBidder[msg.sender] = newBid;
@@ -152,31 +152,28 @@ contract Auction is Ownable, IERC165 {
             uint256 chainId,
             address tokenContract,
             uint256 tokenId
-        ) = tokenboundContract.token();
-        if (chainId != block.chainid) return false;
+        ) = tokenboundContract.token(); // getting the parent
+        if (chainId != block.chainid) return false; // make sure we're the right chain
 
         fundsByBidder[withdrawalAccount] -= withdrawalAmount;
         payable(msg.sender).transfer(withdrawalAmount);
         emit LogWithdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
 
+        // want to call it on tokenboundContract
         // TODO: check if ERC721 using EIP 165 and transfer
-        // if (
-        //     supportsInterface(
-        //         address(tokenboundContract),
-        //         type(IERC721).interfaceId
-        //     )
-        // ) {
-        //     IERC721 token = IERC721(tokenContract);
-        //     token.transferFrom(address(this), withdrawalAccount, tokenId);
-        // }
+        IERC165 tokenbound165 = IERC165(address(tokenboundContract));
+        if (tokenbound165.supportsInterface(type(IERC721).interfaceId)) {
+            IERC721 token = IERC721(address(tokenContract));
+            token.transferFrom(address(this), withdrawalAccount, tokenId);
+        }
 
         // TODO: check if ERC1155
-
-        tokenboundContract.transferFrom(address(this), withdrawalAccount);
 
         finalized = true;
         return true;
     }
+
+    function testBadCast() public returns (bool success) {}
 
     function withdraw()
         public
@@ -216,6 +213,11 @@ contract Auction is Ownable, IERC165 {
         emit LogWithdrawal(msg.sender, withdrawalAccount, withdrawalAmount);
 
         return true;
+    }
+
+    function supportsInterface(bytes4 interfaceId) public pure returns (bool) {
+        return (interfaceId == type(IERC165).interfaceId ||
+            interfaceId == type(IERC6551Account).interfaceId);
     }
 
     /* =========== OWNER ONLY FUNCTIONS =========== */
