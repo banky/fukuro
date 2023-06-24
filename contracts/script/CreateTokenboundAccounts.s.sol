@@ -1,15 +1,15 @@
-// SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
-import "../contracts/AuctionFactory.sol";
-import "../contracts/Auction.sol";
+import "../contracts/Curation.sol";
+import "./mocks/MockERC721.sol";
 
-contract DeployAuctionFactory is Script {
+contract CreateTokenBoundAccounts is Script {
     function run() external {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
-        AuctionFactory auctionFactory = new AuctionFactory();
+
+        // TODO:
         vm.stopBroadcast();
     }
 }
