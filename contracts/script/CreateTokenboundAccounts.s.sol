@@ -1,8 +1,7 @@
 pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
-import "../contracts/Curation.sol";
-import "./mocks/MockERC721.sol";
+import "../contracts/Fukuro.sol";
 
 contract CreateTokenBoundAccounts is Script {
     function run() external {

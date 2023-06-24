@@ -1,20 +1,42 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.13;
+pragma solidity ^0.8.0;
 
 import "openzeppelin-contracts/utils/introspection/IERC165.sol";
 import "openzeppelin-contracts/token/ERC721/IERC721.sol";
 import "openzeppelin-contracts/interfaces/IERC1271.sol";
+import "openzeppelin-contracts/token/ERC721/IERC721Receiver.sol";
+import "openzeppelin-contracts/token/ERC1155/IERC1155Receiver.sol";
 import "openzeppelin-contracts/utils/cryptography/SignatureChecker.sol";
-import "sstore2/utils/Bytecode.sol";
-import "erc6551/interfaces/IERC6551Account.sol";
-import "erc6551/lib/ERC6551AccountLib.sol";
 
-contract Curation is IERC165, IERC1271, IERC6551Account {
+import "../../interfaces/IERC6551Account.sol";
+import "../../lib/ERC6551AccountLib.sol";
+
+contract Fukuro is
+    IERC165,
+    IERC1271,
+    IERC721Receiver,
+    IERC1155Receiver,
+    IERC6551Account
+{
     uint256 public nonce;
-    bytes public verifyHash;
 
-    bool public isOriginal;
-    bool public enforceVerified;
+    bool public isVerified;
+
+    /* ============== MODIFER ============= */
+    /**
+     * @dev validates merkleProof
+     */
+    modifier isValidMerkleProof(bytes32[] calldata merkleProof, bytes32 root) {
+        require(
+            MerkleProof.verify(
+                merkleProof,
+                root,
+                keccak256(abi.encodePacked(msg.sender))
+            ),
+            "Address does not exist in list"
+        );
+        _;
+    }
 
     receive() external payable {}
 
@@ -27,13 +49,6 @@ contract Curation is IERC165, IERC1271, IERC6551Account {
 
         ++nonce;
 
-        // TODO: first 32 bytes used for verification Hash?
-        // TODO: hardcode the function calldata header, to identify transfer
-        // when its a transfer then you flip the bit
-
-        // msg sig
-
-        // transfer, safeTranfer, safeTransferFrom, etc a bunch of them
         emit TransactionExecuted(to, value, data);
 
         bool success;
@@ -76,17 +91,6 @@ contract Curation is IERC165, IERC1271, IERC6551Account {
         if (isValid) {
             return IERC1271.isValidSignature.selector;
         }
-
         return "";
-    }
-
-    /*
-     * @dev Set the hash that must be signed by the token owner to verify the
-     * transaction.
-     */
-    // TODO: is this even useful? you can verify offchain, but can't add it as a modifier to anything
-    function setVerifier(string memory _verifyHash) external {
-        require(msg.sender == owner(), "Not token owner");
-        verifyHash = abi.encodePacked(_verifyHash); // TODO: overflow issues?
     }
 }
