@@ -13,6 +13,9 @@ contract Curation is IERC165, IERC1271, IERC6551Account {
     uint256 public nonce;
     bytes public verifyHash;
 
+    bool public isOriginal;
+    bool public enforceVerified;
+
     receive() external payable {}
 
     function executeCall(
@@ -23,6 +26,12 @@ contract Curation is IERC165, IERC1271, IERC6551Account {
         require(msg.sender == owner(), "Not token owner");
 
         ++nonce;
+
+        // TODO: first 32 bytes used for verification Hash?
+        // TODO: hardcode the function calldata header, to identify transfer
+        // when its a transfer then you flip the bit
+
+        // transfer, safeTranfer, safeTransferFrom, etc a bunch of them
 
         emit TransactionExecuted(to, value, data);
 
@@ -74,6 +83,7 @@ contract Curation is IERC165, IERC1271, IERC6551Account {
      * @dev Set the hash that must be signed by the token owner to verify the
      * transaction.
      */
+    // TODO: is this even useful? you can verify offchain, but can't add it as a modifier to anything
     function setVerifier(string memory _verifyHash) external {
         require(msg.sender == owner(), "Not token owner");
         verifyHash = abi.encodePacked(_verifyHash); // TODO: overflow issues?
