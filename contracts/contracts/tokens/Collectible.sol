@@ -14,9 +14,8 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
     string public baseURI;
 
     /**
-     * team mint are from 1-25 (25 max supply)
-     * whitelist are from 26-1000 (975 max supply)
-     * public mint from 1001 - 6000 (5000 max supply)
+     * gift mint are from 1-25 (25 max supply)
+     * public mint are from 26-1000 (975 max supply)
      **/
 
     uint256 public immutable maxGiftMintId = 25;
@@ -67,9 +66,8 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
     }
 
     /**
-     * @dev mints 1 token per whitelisted address, does not charge a fee
+     * @dev mints tokens does not charge a fee
      * Max supply: 975 (token ids: 26-1000)
-     * charges a fee
      */
     function publicMint(
         uint256 numberOfTokens

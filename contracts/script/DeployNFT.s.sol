@@ -3,7 +3,7 @@ pragma solidity ^0.8.13;
 
 import "forge-std/Script.sol";
 import "../lib/reference/src/interfaces/IERC6551Registry.sol";
-import "../contracts/AfropolitanNFT.sol";
+import "../contracts/tokens/AfropolitanNFT.sol";
 import "../contracts/BundleNFT.sol";
 
 contract DeployNFTs is Script {
@@ -23,11 +23,10 @@ contract DeployNFTs is Script {
             0,
             ""
         );
-        AfropolitanNFT nft = new AfropolitanNFT();
-        nft.mintNFT(
-            address(account_address),
-            "ipfs://bafkreia6ojqj4ynx5nghlhu3kg26ce55adfe75jokrsewoh7dg7e47sieu"
-        );
+        AfropolitanNFT nft = new AfropolitanNFT(
+            "ipfs://bafybeifc5vbzbr5ayrr6gviwb3ftut7pwi5oej2n22oik3wt44wc3rxbre/"
+        ); // baseURI and collectionURI
+        nft.mintTo(address(account_address), 5);
         vm.stopBroadcast();
     }
 }
