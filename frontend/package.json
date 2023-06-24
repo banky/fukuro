@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "alchemy-sdk": "^2.9.1",
     "connectkit": "^1.4.0",
     "next": "^13.4.0",
     "react": "^18.2.0",
