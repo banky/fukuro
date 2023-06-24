@@ -28,12 +28,8 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
     // keep track of those on whitelist who have claimed their NFT
     mapping(address => bool) public claimed;
 
-    constructor(
-        string memory _baseURI,
-        string memory collectionURI
-    ) ERC721("FukuFuku", "FUKU") {
+    constructor(string memory _baseURI) ERC721("FukuFuku", "FUKU") {
         setBaseURI(_baseURI);
-        setCollectionURI(collectionURI);
     }
 
     modifier isCorrectPayment(uint256 price, uint256 numberOfTokens) {
