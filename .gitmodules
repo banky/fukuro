@@ -10,6 +10,3 @@
 [submodule "contracts/lib/reference"]
 	path = contracts/lib/reference
 	url = https://github.com/erc6551/reference
-[submodule "contracts/lib/account-abstraction.git"]
-	path = contracts/lib/account-abstraction.git
-	url = https://github.com/eth-infinitism/account-abstraction.git
