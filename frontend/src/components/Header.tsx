@@ -5,7 +5,7 @@ import { ReactNode } from "react";
 
 export const Header = () => {
   return (
-    <div className="flex justify-between">
+    <div className="flex justify-between mb-8">
       <button className="flex gap-2 text-2xl items-center">
         <h1>袋</h1>
         <h1>|</h1>
