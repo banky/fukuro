@@ -1,19 +1,26 @@
-import { Providers } from './providers'
+import { Header } from "../components/Header";
+import "../globals.css";
+import { Providers } from "./providers";
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 export const metadata = {
-  title: 'wagmi',
-}
+  title: "wagmi",
+};
 
 export default function RootLayout({
   children,
 }: {
-  children: React.ReactNode
+  children: React.ReactNode;
 }) {
   return (
     <html lang="en">
-      <body>
-        <Providers>{children}</Providers>
+      <body className={inter.className}>
+        <Providers>
+          <Header />
+          {children}
+        </Providers>
       </body>
     </html>
-  )
+  );
 }
