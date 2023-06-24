@@ -9,7 +9,7 @@ import "openzeppelin-contracts/access/Ownable.sol";
 import "openzeppelin-contracts/security/ReentrancyGuard.sol";
 import "openzeppelin-contracts/utils/cryptography/MerkleProof.sol";
 
-contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
+contract AfropolitanNFT is ERC721URIStorage, Ownable, ReentrancyGuard {
     string private _collectionURI;
     string public baseURI;
 
@@ -28,10 +28,14 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
     // keep track of those on whitelist who have claimed their NFT
     mapping(address => bool) public claimed;
 
-    constructor(string memory _baseURI) ERC721("FukuFuku", "FUKU") {
+    // ============ CONSTRUCTOR ============
+    constructor(
+        string memory _baseURI
+    ) ERC721("Afropolitan Citizen", "AFROPOL") {
         setBaseURI(_baseURI);
     }
 
+    // ============ MODIFIERS ============
     modifier isCorrectPayment(uint256 price, uint256 numberOfTokens) {
         require(
             price * numberOfTokens == msg.value,
@@ -49,7 +53,6 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
     }
 
     // ============ PUBLIC FUNCTIONS FOR MINTING ============
-
     /**
      * @dev mints 1 token per address, does not charge a fee
      * Max supply: 25 (token ids: 1-25)
@@ -65,7 +68,8 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
      * @dev mints tokens does not charge a fee
      * Max supply: 975 (token ids: 26-1000)
      */
-    function publicMint(
+    function mintTo(
+        address to,
         uint256 numberOfTokens
     )
         public
@@ -75,7 +79,7 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
         nonReentrant
     {
         for (uint256 i = 0; i < numberOfTokens; i++) {
-            _mint(msg.sender, publicMintId);
+            _mint(to, publicMintId);
             publicMintId++;
         }
     }
@@ -88,10 +92,7 @@ contract FukuFuku is ERC721URIStorage, Ownable, ReentrancyGuard {
             _exists(tokenId),
             "ERC721Metadata: query for nonexistent token"
         );
-        return
-            string(
-                abi.encodePacked(baseURI, Strings.toString(tokenId), ".json")
-            );
+        return string(abi.encodePacked(baseURI, Strings.toString(tokenId)));
     }
 
     /**
