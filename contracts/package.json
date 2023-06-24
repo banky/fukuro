@@ -1,0 +1,10 @@
+{
+  "name": "fukuro-contracts",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "hardhat": "^2.16.0",
+    "hardhat-preprocessor": "^0.1.5"
+  }
+}
