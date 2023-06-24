@@ -11,11 +11,23 @@ contract DeployNFTs is Script {
         uint256 deployerPrivateKey = vm.envUint("PRIVATE_KEY");
         vm.startBroadcast(deployerPrivateKey);
         BundleNFT bundle = new BundleNFT();
-        bundle.mintNFT(address(0xCC2c242B3B89D6A5BD37700AE681A4b94EE7d7CE), "")
-        IERC6551Registry registry = IERC6551Registry(0x02101dfB77FDE026414827Fdc604ddAF224F0921)
-        address account_address = registry.createAccount(0x2d25602551487c3f3354dd80d76d54383a243358, block.chainid, address(bundle), 1, 0)
-        AfropolitanNFT nft = new AfropolitanNFT()
-        nft.mintNFT(address(account_address), "ipfs://bafkreia6ojqj4ynx5nghlhu3kg26ce55adfe75jokrsewoh7dg7e47sieu")
+        bundle.mintNFT(address(0xCC2c242B3B89D6A5BD37700AE681A4b94EE7d7CE), "");
+        IERC6551Registry registry = IERC6551Registry(
+            0x02101dfB77FDE026414827Fdc604ddAF224F0921
+        );
+        address account_address = registry.createAccount(
+            0x2D25602551487C3f3354dD80D76D54383A243358,
+            block.chainid,
+            address(bundle),
+            1,
+            0,
+            ""
+        );
+        AfropolitanNFT nft = new AfropolitanNFT();
+        nft.mintNFT(
+            address(account_address),
+            "ipfs://bafkreia6ojqj4ynx5nghlhu3kg26ce55adfe75jokrsewoh7dg7e47sieu"
+        );
         vm.stopBroadcast();
     }
 }
