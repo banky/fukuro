@@ -1,0 +1,38 @@
+{
+  "transactions": [
+    {
+      "hash": "0x679e717619b4df1a3835f8717372a6f31c0db76f421c609672d1725cb6be7a82",
+      "transactionType": "CALL",
+      "contractName": "FukuFuku",
+      "contractAddress": "0xA6d32Be299C481c7C689b6f7238A1cE1b5A3213d",
+      "function": "publicMint(uint256)",
+      "arguments": [
+        "10"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0xa6d32be299c481c7c689b6f7238a1ce1b5a3213d",
+        "gas": "0x66b8b",
+        "value": "0x470de4df820000",
+        "data": "0x2db11544000000000000000000000000000000000000000000000000000000000000000a",
+        "nonce": "0x53",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0x679e717619b4df1a3835f8717372a6f31c0db76f421c609672d1725cb6be7a82"
+  ],
+  "path": "/Users/jaclyn/Documents/code/fukuro/contracts/broadcast/MintFuku.s.sol/5/run-latest.json",
+  "returns": {},
+  "timestamp": 1687657579,
+  "chain": 5,
+  "multi": false,
+  "commit": "a55f0b8"
+}

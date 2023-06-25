@@ -27,7 +27,7 @@ contract DemoSetup is Script {
             implementationAddress,
             block.chainid,
             address(fuku),
-            29,
+            32,
             0,
             ""
         );
@@ -37,7 +37,7 @@ contract DemoSetup is Script {
             implementationAddress,
             block.chainid,
             address(fuku),
-            30,
+            33,
             0,
             ""
         );
@@ -46,7 +46,7 @@ contract DemoSetup is Script {
             implementationAddress,
             block.chainid,
             address(fuku),
-            31,
+            34,
             0,
             ""
         );
@@ -54,26 +54,26 @@ contract DemoSetup is Script {
 
         address seaportBurner = 0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b;
         address banky = 0xCC2c242B3B89D6A5BD37700AE681A4b94EE7d7CE;
+        address nick = 0x2633223E6cEE2Fb4e030d8F815dfc78003c4CCe1;
 
         // send Afropolitans to fuku accounts
-        afropolitan.transferFrom(seaportBurner, accountAddress1, 36);
-        afropolitan.transferFrom(seaportBurner, accountAddress1, 37);
-        afropolitan.transferFrom(seaportBurner, accountAddress1, 38);
+        afropolitan.transferFrom(seaportBurner, accountAddress1, 46);
+        afropolitan.transferFrom(seaportBurner, accountAddress1, 47);
+        afropolitan.transferFrom(seaportBurner, accountAddress1, 48);
 
-        afropolitan.transferFrom(seaportBurner, accountAddress2, 39);
-        afropolitan.transferFrom(seaportBurner, accountAddress2, 40);
-        afropolitan.transferFrom(seaportBurner, accountAddress2, 41);
+        afropolitan.transferFrom(seaportBurner, accountAddress2, 49);
+        afropolitan.transferFrom(seaportBurner, accountAddress2, 50);
+        afropolitan.transferFrom(seaportBurner, accountAddress2, 51);
 
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 42);
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 43);
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 44);
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 45);
+        afropolitan.transferFrom(seaportBurner, accountAddress3, 52);
+        afropolitan.transferFrom(seaportBurner, accountAddress3, 53);
+        afropolitan.transferFrom(seaportBurner, accountAddress3, 54);
+        afropolitan.transferFrom(seaportBurner, accountAddress3, 55);
 
         // send fukus to banky
-        fuku.transferFrom(seaportBurner, banky, 29);
-        fuku.transferFrom(seaportBurner, banky, 30);
-
-        fuku.transferFrom(seaportBurner, banky, 31);
+        fuku.transferFrom(seaportBurner, nick, 32);
+        fuku.transferFrom(seaportBurner, nick, 33);
+        fuku.transferFrom(seaportBurner, nick, 34);
 
         vm.stopBroadcast();
     }
