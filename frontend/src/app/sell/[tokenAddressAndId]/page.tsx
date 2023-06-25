@@ -77,11 +77,10 @@ export function Page() {
     // if it's not available, use a bigg number lol
     const blockNumber = blockNumberResult.data ?? BigInt(10000000);
 
-    const startBlock = blockNumber + BigInt(1);
-    const endBlock = BigInt(bidDuration * NUM_BLOCKS_IN_A_DAY);
+    // Block buffer for processing
+    const startBlock = blockNumber + BigInt(10);
+    const endBlock = startBlock + BigInt(bidDuration * NUM_BLOCKS_IN_A_DAY);
 
-    // Start block is current block + 1
-    // End block is current block plus duration (days) in blocks
     await writeAsync({
       args: [minBidIncrement, startBlock, endBlock, accountOwnedByToken],
     });
