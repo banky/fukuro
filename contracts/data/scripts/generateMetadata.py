@@ -15,7 +15,7 @@ def generateMetadata(jsonFolderPath):
     # public
     for idx in range(0, 50):
       data = {}
-      data['name'] = "Fukuro" + str(idx-1000)
+      data['name'] = "Fukuro" + str(idx+1)
       data['image'] = random.choice(fukus)
       data['description'] = "Bundle with EIP 6551."
       with open(jsonFolderPath+ str(idx) +'.json', 'w+', encoding='utf-8') as jsonf:
