@@ -62,7 +62,7 @@ export function Page() {
   // const [tokenAddress, id] = tokenAddressAndId.split(":");
   // console.log({ tokenAddress, id });
 
-  const [minBidIncrement, setMinBidIncrement] = useState(0);
+  const [minBidIncrement, setMinBidIncrement] = useState<number>(0);
   const [bidDuration, setBidDuration] = useState(0); // In days
 
   const { data, isLoading, isSuccess, writeAsync } = useContractWrite({
@@ -81,9 +81,14 @@ export function Page() {
     const startBlock = blockNumber + BigInt(10);
     const endBlock = startBlock + BigInt(bidDuration * NUM_BLOCKS_IN_A_DAY);
 
-    await writeAsync({
-      args: [minBidIncrement, startBlock, endBlock, accountOwnedByToken],
+    const minBidIncrementWei = minBidIncrement * 10 ** 18; // Convert to wei
+
+    // Start block is current block + 1
+    // End block is current block plus duration (days) in blocks
+    const writeFuncResult = await writeAsync({
+      args: [minBidIncrementWei, startBlock, endBlock, accountOwnedByToken],
     });
+    console.log(writeFuncResult);
   };
 
   return (
@@ -112,23 +117,32 @@ export function Page() {
             </>
           )}
         </div>
-        {ownedTokens.length > 0 && (
+        {ownedTokens.length > 0 && !isLoading && !isSuccess && (
           <div className="my-8 flex flex-col gap-4 w-fit mx-auto">
             <Input
               value={minBidIncrement || ""}
               onChange={(e) => setMinBidIncrement(Number(e.target.value))}
-              placeholder="69420"
-              label="Minimum bid increment (in wei)"
+              placeholder="0.05"
+              label="Minimum bid increment (in ETH)"
               type="number"
+              step="0.0001"
+              min="0"
             />
             <Input
               value={bidDuration || ""}
               onChange={(e) => setBidDuration(Number(e.target.value))}
               type="number"
-              placeholder="1"
+              placeholder="5"
               label="Auction duration in days"
+              step="1"
             />
             <Button onClick={() => startAuction()}>Start auction</Button>
+          </div>
+        )}
+        {isLoading && <div className="my-8 text-center">Pending transaction signature...</div>}
+        {isSuccess && (
+          <div className="text-center my-8">
+            <div className="text-2xl">Success! Auction created</div>
           </div>
         )}
       </div>
