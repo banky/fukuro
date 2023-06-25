@@ -47,18 +47,18 @@ const hydrateAuction = async (auctionAddress: string) => {
       chainId: 5,
     })
   
-    const canceled = await readContract({
-      address: auctionAddress as any,
-      abi: Auction.abi,
-      functionName: 'canceled',
-      chainId: 5,
-    })
-    const finalized = await readContract({
-      address: auctionAddress as any,
-      abi: Auction.abi,
-      functionName: 'finalized',
-      chainId: 5,
-    })
+    // const canceled = await readContract({
+    //   address: auctionAddress as any,
+    //   abi: Auction.abi,
+    //   functionName: 'canceled',
+    //   chainId: 5,
+    // })
+    // const finalized = await readContract({
+    //   address: auctionAddress as any,
+    //   abi: Auction.abi,
+    //   functionName: 'finalized',
+    //   chainId: 5,
+    // })
     const highestBindingBid = await readContract({
       address: auctionAddress as any,
       abi: Auction.abi,
@@ -102,8 +102,8 @@ const hydrateAuction = async (auctionAddress: string) => {
       startBlock,
       endBlock,
       bidIncrement,
-      canceled,
-      finalized,
+    //   canceled,
+    //   finalized,
       highestBindingBid,
       highestBidder,
       highestBid,
@@ -126,6 +126,7 @@ export const useAuctions = () => {
     const fetchAuctions = async () => {
       const _hydratedAuctions = await Promise.all(
         (auctionAddresses as any[]).map(async (auctionAddress: string) => {
+            console.log('map')
           return await hydrateAuction(auctionAddress);
         })
       );
@@ -140,12 +141,12 @@ useEffect(() => {
     const fetchAuctions = async () => {
         if (hydratedAuctions.length === 0) return;
         const block = await fetchBlockNumber()
-        const _activeAuctions = hydratedAuctions.filter((auction) => (auction.canceled === false && auction.finalized === false && auction.endBlock <= block));
-        const _inactiveActions = hydratedAuctions.filter((auction) => auction.canceled === true || auction.finalized === true || auction.endBlock > block);
+        console.log({block})
+        const _activeAuctions = hydratedAuctions.filter((auction) => (!auction.canceled && !auction.finalized && auction.startBlock <= block && auction.endBlock > block));
+        const _inactiveActions = hydratedAuctions.filter((auction) => auction.canceled || auction.finalized || auction.endBlock <= block || auction.startBlock > block);
         
         setActiveAuctions(_activeAuctions);
         setInactiveAuctions(_inactiveActions)
-        console.log('set false')
         setLoadingAuctions(false);
     }
     fetchAuctions();

@@ -16,33 +16,34 @@ import { AUCTIONS, OPENSEA_URL } from "../../../utils/constants";
 import { Auction, HydratedAuction, hydrateAuction } from "../../../components/Auction";
 import { NFTList } from "../../../components/NFTList";
 import { AuctionsContext } from "../../../contexts/AuctionsContext";
+import { fetchBlockNumber } from "wagmi/actions";
 
 export function Page() {
-  const {activeAuctions, loading} = useContext(AuctionsContext);
+  const {activeAuctions, inactiveAuctions, loading} = useContext(AuctionsContext);
   const pathName = usePathname();
   const auctionAddress = pathName.replace("/buy/", "");
 
-  const auction = useMemo(()=>activeAuctions.find((auction) => auction.auctionAddress === auctionAddress),[activeAuctions, auctionAddress])
-  const [endTimestampEstimate, setEndTimestampEstimate] = useState(0);
+  const auction = useMemo(()=>[...activeAuctions, ...inactiveAuctions].find((auction) => auction.auctionAddress === auctionAddress),[activeAuctions, inactiveAuctions, auctionAddress])
+  const [startTimestampEstimate, setStartTimestampEstimate] = useState(BigInt(0));
+  const [endTimestampEstimate, setEndTimestampEstimate] = useState(BigInt(0));
 
   useEffect(() => {
     if (!auction) { return; }
     const getAuctionData = async () => {
+      const block = await fetchBlockNumber();
+      if (block < auction.startBlock) {
+        setStartTimestampEstimate(BigInt(Date.now()) + (BigInt(auction.startBlock) - block)*BigInt(12)*BigInt(1000))
+      }
       const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_GOERLI_RPC_URL)
-      const startTimestamp = Number((await provider.getBlock("0x3888a1ae5be36e59d878e1d3df0b43050b5e10fa1389ca0760625c46e00128d0")).timestamp);
-      const blockDiff = Number(auction.endBlock) - Number(auction.startBlock);
-      setEndTimestampEstimate(blockDiff * 12 * 1000 + startTimestamp*1000)
+      const startTimestamp = Number((await provider.getBlock(Number(auction.startBlock))).timestamp);
+      const blockDiff = auction.endBlock - auction.startBlock;
+      setStartTimestampEstimate(BigInt(startTimestamp)*BigInt(1000))
+      setEndTimestampEstimate(BigInt(blockDiff) * BigInt(12) * BigInt(1000) + BigInt(startTimestamp)*BigInt(1000))
     }
     if (!loading) {
       getAuctionData()
     }
   },[setEndTimestampEstimate, auction, loading])
-
-  const { address } = useAccount();
-  const chainId = useChainId();
-
-  const [minBid, setMinBid] = useState(0);
-  const startAuction = async () => {};
 
   return (
     <div className=" min-h-screen">
@@ -55,7 +56,7 @@ export function Page() {
           </Link>
           <h1 className="text-center text-2xl">Auction for {auctionAddress}</h1>
           <NFTList />
-          {loading ? "Loading..." : <Auction auction={auction} endTimestampEstimate={endTimestampEstimate}/>}
+          {loading ? "Loading..." : <Auction auction={auction} startTimestampEstimate={startTimestampEstimate} endTimestampEstimate={endTimestampEstimate}/>}
         </div>
       </div>
     </div>

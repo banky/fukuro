@@ -8,6 +8,7 @@ import { Button } from "../../components/Button";
 import { HydratedAuction } from "../../hooks/useAuctions";
 import { AuctionsContext } from "../../contexts/AuctionsContext";
 import { useContext } from "react";
+import Image from "next/image";
 
 function Page() {
   const {activeAuctions, inactiveAuctions, loading} = useContext(AuctionsContext);
