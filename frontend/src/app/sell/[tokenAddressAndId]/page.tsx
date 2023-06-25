@@ -16,7 +16,7 @@ import { Token } from "../../../utils/subgraph";
 import { SiOpensea } from "react-icons/si";
 import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
-import { OPENSEA_URL } from "../../../utils/constants";
+import { AUCTION_FACTORY, OPENSEA_URL } from "../../../utils/constants";
 import { Input } from "../../../components/Input";
 import AuctionFactory from "../../../data/AuctionFactory.json";
 
@@ -66,7 +66,7 @@ function Page() {
   const [bidDuration, setBidDuration] = useState(0); // In days
 
   const { data, isLoading, isSuccess, writeAsync } = useContractWrite({
-    address: "0xb16916Fc4c5bCb989b9e2c1e73Ed56b74003dbE2",
+    address: AUCTION_FACTORY,
     abi: AuctionFactory.abi,
     functionName: "createAuction",
   });
