@@ -11,7 +11,7 @@ import {
 } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://api.studio.thegraph.com/query/48907/fukuro/version/latest",
+  uri: "https://api.studio.thegraph.com/query/48907/fukuro-demo/version/latest",
   cache: new InMemoryCache(),
 });
 
@@ -24,7 +24,9 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ApolloProvider client={client}>
       <WagmiConfig config={config}>
-        <ConnectKitProvider><AuctionsProvider>{mounted && children}</AuctionsProvider></ConnectKitProvider>
+        <ConnectKitProvider>
+          <AuctionsProvider>{mounted && children}</AuctionsProvider>
+        </ConnectKitProvider>
       </WagmiConfig>
     </ApolloProvider>
   );

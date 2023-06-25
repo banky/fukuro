@@ -12,7 +12,6 @@ import "forge-std/console.sol";
 
 contract MultichainDeploy is Script {
     function run() external {
-        address seaportBurner = 0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b;
         address banky = 0xCC2c242B3B89D6A5BD37700AE681A4b94EE7d7CE;
         address nick = 0x2633223E6cEE2Fb4e030d8F815dfc78003c4CCe1;
         address straightupjac = 0xE4Edb4C1696019589249Acf483DA341A89C9d961;
