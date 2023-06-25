@@ -34,8 +34,7 @@ export function Page() {
           <div className="my-4"> with ease</div>
         </h1>
         <p className="text-center">
-          The worlds first marketplace that natively supports ERC 6551 token
-          bound accounts. Cheaply trade accounts with unlimited possiblility
+          The worlds first marketplace that natively supports ERC 6551 tokenbound accounts. Trade and explore tokenbound accounts with unlimited possiblility
         </p>
       </div>
 
