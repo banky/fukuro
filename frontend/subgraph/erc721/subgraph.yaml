@@ -6,7 +6,7 @@ dataSources:
     name: ERC721
     network: goerli
     source:
-      address: "0xfBF385d2107E87f4C513254BD5Ce8649607eC0AB"
+      address: "0xDE47e698ea185D553947Ec7B34F32d65c6f2b533"
       abi: ERC721
       startBlock: 9234180
     mapping:

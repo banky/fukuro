@@ -11,7 +11,10 @@ import {
 } from "@apollo/client";
 
 const client = new ApolloClient({
-  uri: "https://api.studio.thegraph.com/query/48907/fukuro-demo/version/latest",
+  // Pre finalist demo
+  // uri: "https://api.studio.thegraph.com/query/48907/fukuro-demo/version/latest",
+  uri:
+    "https://api.studio.thegraph.com/query/48907/fukuro-finalist/version/latest",
   cache: new InMemoryCache(),
 });
 
