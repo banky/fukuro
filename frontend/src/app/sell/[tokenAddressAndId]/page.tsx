@@ -9,6 +9,7 @@ import { useAccount, useChainId } from "wagmi";
 import { fetchERC721Balances } from "../../../utils/alchemy";
 import { Token } from "../../../utils/subgraph";
 import { SiOpensea } from "react-icons/si";
+import { BiArrowBack } from 'react-icons/bi'
 import Link from "next/link";
 import { OPENSEA_URL } from "../../../utils/constants";
 
@@ -55,25 +56,44 @@ export function Page() {
   // console.log({ tokenAddress, id });
 
   const [minBid, setMinBid] = useState(0);
-  const startAuction = async () => {};
+  const startAuction = async () => { };
 
   return (
-    <div>
-      <h1 className="text-center text-2xl">Items in wallet</h1>
-      <div className="grid grid-cols-4 mt-8 gap-4 max-w-4xl mx-auto">
-        {ownedTokens.map((token) => {
-          return <ChildERC721 key={`${token.tokenId}`} token={token} />;
-        })}
-      </div>
+    <div className=" min-h-screen">
+      <div className="flex flex-col justify-between">
+        <div>
+          <Link href="/sell">
+            <div className="flex justify-start gap-4 items-center">
+              <BiArrowBack /> Go back
+            </div>
+          </Link>
+          <h1 className="text-center text-2xl">
+            Artifacts owned by Tokenbound Account
+          </h1>
+          <div className="grid grid-cols-4 mt-8 gap-4 max-w-4xl mx-auto">
+            {ownedTokens.length > 0 && ownedTokens.map((token) => {
+              return <ChildERC721 key={`${token.tokenId}`} token={token} />;
+            })}
+          </div>
+          {ownedTokens.length === 0 && (
+            <>
+              <div className="text-center text-xl mb-10">
+                This tokenbound compound account does not own any artifacts
+              </div>
+            </>
 
-      <div className="my-8 flex gap-4 w-fit mx-auto">
-        <input
-          className="text-black px-4 py-2 rounded-md"
-          value={minBid || ""}
-          onChange={(e) => setMinBid(Number(e.target.value))}
-          placeholder="Enter a minimum bid value"
-        />
-        <Button onClick={() => startAuction()}>Start auction</Button>
+          )}
+        </div>
+        {ownedTokens.length > 0 &&
+          <div className="my-8 flex gap-4 w-fit mx-auto">
+            <input
+              className="text-black px-4 py-2 rounded-md"
+              value={minBid || ""}
+              onChange={(e) => setMinBid(Number(e.target.value))}
+              placeholder="Enter a minimum bid value"
+            />
+            <Button onClick={() => startAuction()}>Start auction</Button>
+          </div>}
       </div>
     </div>
   );
