@@ -64,4 +64,8 @@ contract AuctionFactory {
         auctionMap[auction] = AuctionState.OPEN;
         auctions.push(auction);
     }
+
+    function getAuctions() public view returns (Auction[] memory) {
+        return auctions;
+    }
 }
