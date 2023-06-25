@@ -13,27 +13,6 @@ import Link from "next/link";
 import { OPENSEA_URL } from "../../../utils/constants";
 
 export function Page() {
-  // const tokens = [
-  //   {
-  //     imageUrl: "https://ipfs.io/ipfs/bafybeido3vjv6t2p7ijpdsa3qlpsejksv6js225g7bjt7zv67hfovjgqcq",
-  //     title: "Afropolitan",
-  //     tokenAddress: "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
-  //     tokenId: 26,
-  //   },
-  //   {
-  //     imageUrl: "https://ipfs.io/ipfs/bafybeid4blrpjudmqu7eborxklbnonoopqmm7opymlpfrgubw5ctt7m2c4",
-  //     title: "Afropolitan",
-  //     tokenAddress: "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
-  //     tokenId: 27,
-  //   },
-  //   {
-  //     imageUrl: "https://ipfs.io/ipfs/bafybeiaq4xzwux7qw7mbp5jdz3xivac4s4y2uixqj3lzbxeomcyzw4paaq",
-  //     title: "Afropolitan",
-  //     tokenAddress: "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
-  //     tokenId: 28,
-  //   }
-  // ];
-
   const pathName = usePathname();
   const tokenAddressAndId = pathName.replace("/sell/", "");
   const [tokenAddress, tokenId] = tokenAddressAndId.split(":");
