@@ -27,9 +27,9 @@ export interface HydratedAuction {
 }
 
 
-export const Auction = ({ auction, endTimestampEstimate }: { auction: Auction, endTimestampEstimate: number }) => {
-    const { state, highestBid, highestBidder } = auction;
-    const [bid, setBid] = useState(highestBid + 1);
+export const Auction = ({ auction, endTimestampEstimate }: { auction: HydratedAuction, endTimestampEstimate: number }) => {
+    const { canceled, finalized, highestBid, highestBidder, bidIncrement } = auction;
+    const [bid, setBid] = useState(highestBid + bidIncrement);
     const [currentTime, setCurrentTime] = useState(Date.now());
     useEffect(() => {
         setInterval(() => {
@@ -37,17 +37,22 @@ export const Auction = ({ auction, endTimestampEstimate }: { auction: Auction, e
         }, 1000);
     }, []);
     return (
-        <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
-            <div className="mb-4">
+        <div className="opacity-60 p-4 rounded-xl">
+            < div className="mb-4" >
                 <h1 className="text-lg">
-                    {state}
+                    {canceled ? 'Canceled' : finalized ? 'Finalized' : 'Open'}
                 </h1>
-            </div>
+            </div >
             <div className="flex mb-4">
                 <div className="flex flex-col">
-                    <div className="text-lg">
-                        Highest bid: {highestBid}
-                    </div>
+                    {highestBid ?
+                        <div className="text-lg">
+                            Highest bid: {highestBid}
+                        </div> :
+                        <div className="text-lg">
+                            No bids yet
+                        </div>
+                    }
                     <div className="text-lg">
                         Highest bidder: {highestBidder}
                     </div>
@@ -67,7 +72,7 @@ export const Auction = ({ auction, endTimestampEstimate }: { auction: Auction, e
                     console.log("Place bid");
                 }} disabled={bid <= highestBid}>Place bid</Button>
             </div>
-        </div>
+        </div >
     );
 };
 

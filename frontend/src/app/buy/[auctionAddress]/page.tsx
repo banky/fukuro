@@ -55,12 +55,6 @@ export function Page() {
     getAuctionData()
   }, [setEndTimestampEstimate, auction])
 
-  const { address } = useAccount();
-  const chainId = useChainId();
-
-  const [minBid, setMinBid] = useState(0);
-  const startAuction = async () => { };
-
   return (
     <div className=" min-h-screen">
       <div className="flex flex-col justify-between">
@@ -70,8 +64,7 @@ export function Page() {
               <BiArrowBack /> Go back
             </div>
           </Link>
-          <h1 className="text-center text-2xl">Auction for {auctionAddress}</h1>
-          <NFTList />
+          <h1 className="text-center text-2xl">Auction for {auction?.parentNFT.title} # {auction?.parentNFT.tokenId}</h1>
           {auction ?
             <Auction auction={auction} endTimestampEstimate={endTimestampEstimate} />
             : <div>Loading...</div>}
