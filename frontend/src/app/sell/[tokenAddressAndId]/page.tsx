@@ -72,6 +72,7 @@ export function Page() {
           </h1>
           <div className="grid grid-cols-4 mt-8 gap-4 max-w-4xl mx-auto">
             {ownedTokens.length > 0 && ownedTokens.map((token) => {
+              console.log(token);
               return <ChildERC721 key={`${token.tokenId}`} token={token} />;
             })}
           </div>

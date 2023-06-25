@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { BLOCK_EXPLORER_URL, OPENSEA_URL } from "../../utils/constants";
 import { GoCodescan } from 'react-icons/go'
+import { NFTList } from "../../components/NFTList";
 
 function Page() {
   const auctions = [
@@ -39,6 +40,7 @@ function Page() {
               />
             </>))}
         </div>
+        <NFTList />
       </div>
     </>
   );
