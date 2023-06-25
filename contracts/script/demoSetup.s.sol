@@ -22,12 +22,14 @@ contract DemoSetup is Script {
         );
         FukuFuku fuku = FukuFuku(0xA6d32Be299C481c7C689b6f7238A1cE1b5A3213d);
 
+        uint startFuku = 35;
+
         // create 6551 accounts for fukus
         address accountAddress1 = registry.createAccount(
             implementationAddress,
             block.chainid,
             address(fuku),
-            32,
+            startFuku,
             0,
             ""
         );
@@ -37,7 +39,7 @@ contract DemoSetup is Script {
             implementationAddress,
             block.chainid,
             address(fuku),
-            33,
+            startFuku + 1,
             0,
             ""
         );
@@ -46,7 +48,7 @@ contract DemoSetup is Script {
             implementationAddress,
             block.chainid,
             address(fuku),
-            34,
+            startFuku + 2,
             0,
             ""
         );
@@ -55,25 +57,33 @@ contract DemoSetup is Script {
         address seaportBurner = 0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b;
         address banky = 0xCC2c242B3B89D6A5BD37700AE681A4b94EE7d7CE;
         address nick = 0x2633223E6cEE2Fb4e030d8F815dfc78003c4CCe1;
+        address straightupjac = 0xE4Edb4C1696019589249Acf483DA341A89C9d961;
 
         // send Afropolitans to fuku accounts
-        afropolitan.transferFrom(seaportBurner, accountAddress1, 46);
-        afropolitan.transferFrom(seaportBurner, accountAddress1, 47);
-        afropolitan.transferFrom(seaportBurner, accountAddress1, 48);
 
-        afropolitan.transferFrom(seaportBurner, accountAddress2, 49);
-        afropolitan.transferFrom(seaportBurner, accountAddress2, 50);
-        afropolitan.transferFrom(seaportBurner, accountAddress2, 51);
+        // uint start = 66;
+        // for (uint256 i = 0; i < 3; i++) {
+        //     afropolitan.transferFrom(seaportBurner, accountAddress1, start + i);
+        // }
+        // for (uint256 i = 0; i < 4; i++) {
+        //     afropolitan.transferFrom(
+        //         seaportBurner,
+        //         accountAddress2,
+        //         start + 3 + i
+        //     );
+        // }
+        // for (uint256 i = 0; i < 3; i++) {
+        //     afropolitan.transferFrom(
+        //         seaportBurner,
+        //         accountAddress3,
+        //         start + 7 + i
+        //     );
+        // }
 
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 52);
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 53);
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 54);
-        afropolitan.transferFrom(seaportBurner, accountAddress3, 55);
-
-        // send fukus to banky
-        fuku.transferFrom(seaportBurner, nick, 32);
-        fuku.transferFrom(seaportBurner, nick, 33);
-        fuku.transferFrom(seaportBurner, nick, 34);
+        // send fukus
+        fuku.transferFrom(seaportBurner, straightupjac, 35);
+        fuku.transferFrom(seaportBurner, straightupjac, 36);
+        fuku.transferFrom(seaportBurner, straightupjac, 37);
 
         vm.stopBroadcast();
     }

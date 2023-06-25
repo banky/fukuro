@@ -47,7 +47,7 @@ export function Page() {
     };
 
     fetchBalances();
-  }, [address, chainId]);
+  }, [accountOwnedByToken, address, chainId]);
 
   console.log("ownedTokens", ownedTokens);
 
