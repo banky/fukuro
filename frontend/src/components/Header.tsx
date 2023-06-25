@@ -6,11 +6,11 @@ import { ReactNode } from "react";
 export const Header = () => {
   return (
     <div className="flex justify-between mb-8">
-      <button className="flex gap-2 text-2xl items-center">
+      <Link href="/" className="flex gap-2 text-2xl items-center">
         <h1>袋</h1>
         <h1>|</h1>
         <h1>Fukuro</h1>
-      </button>
+      </Link>
       <div className="flex gap-8 items-center">
         <HeaderLink href="/buy">Buy</HeaderLink>
         <HeaderLink href="/sell">Sell</HeaderLink>

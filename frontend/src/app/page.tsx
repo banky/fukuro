@@ -17,7 +17,6 @@ export function Page() {
         "0x1e57CdcbF15551744aee01ab016219E0C03C174b",
         chainId
       );
-      console.log("erc721Balances", erc721Balances);
     };
 
     fetchBalances();

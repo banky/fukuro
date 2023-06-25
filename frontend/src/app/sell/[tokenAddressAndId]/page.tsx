@@ -3,6 +3,8 @@
 import Image from "next/image";
 import { useState } from "react";
 import { Button } from "../../../components/Button";
+import { usePathname } from "next/navigation";
+import { useAccountOwnedByToken } from "../../../hooks/useAccountOwnedByToken";
 
 export function Page() {
   const token = {
@@ -11,6 +13,17 @@ export function Page() {
     tokenAddress: "0x123",
     tokenId: 1,
   };
+  const pathName = usePathname();
+  const tokenAddressAndId = pathName.replace("/sell/", "");
+  const [tokenAddress, tokenId] = tokenAddressAndId.split(":");
+  console.log({ tokenAddress, tokenId });
+
+  const accountOwnedByToken = useAccountOwnedByToken(tokenAddress, tokenId);
+  console.log({ accountOwnedByToken });
+
+  // const tokenAddressAndId = router.query.tokenAddressAndId as string;
+  // const [tokenAddress, id] = tokenAddressAndId.split(":");
+  // console.log({ tokenAddress, id });
 
   const [minBid, setMinBid] = useState(0);
   const startAuction = async () => {};
@@ -68,7 +81,7 @@ const ChildERC20 = ({ symbol, balance }: ChildERC20Props) => {
   return (
     <div className="bg-purple-950 opacity-60  rounded-xl">
       <div className="flex">
-        <Image />
+        <div></div>
       </div>
     </div>
   );

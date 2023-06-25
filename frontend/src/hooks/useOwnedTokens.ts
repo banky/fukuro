@@ -8,6 +8,7 @@ const GET_OWNED_TOKENS = gql`
     owners(where: { id: $id }) {
       ownedTokens {
         id
+        uri
       }
       balance
     }
@@ -25,7 +26,6 @@ export const useOwnedTokens = () => {
     onCompleted: async (data) => {
       const parsedTokens = await parseOwnedTokensResponse(data, chainId);
       setTokens(parsedTokens);
-      console.log(parsedTokens);
     },
   });
 

@@ -5,6 +5,7 @@ const LOOTBOX_IMAGE =
 
 export type Token = {
   title: string;
+  description: string;
   contract: string;
   tokenId: number;
   imageUrl: string;
@@ -22,29 +23,24 @@ export const parseOwnedTokensResponse = async (
   return Promise.all(
     ownedTokens.map(async (token: any) => {
       const [contract, tokenId] = token.id.split(":");
-      let tokenUri = "";
-      if (tokenUri.startsWith("ipfs://")) {
-        tokenUri = ipfsUrlToGatewayUrl(tokenUri);
-      } else if (tokenUri.length === 0) {
-        tokenUri = LOOTBOX_IMAGE;
-      } else {
-        tokenUri = token.uri;
-      }
+      const tokenUri = ipfsUrlToGatewayUrl(token.uri ?? "");
 
-      const contractDetails = await getNFTContractDetails(contract, chainId);
-      const title = contractDetails.name;
+      const nftDetails = await fetch(tokenUri);
+      const nftJson = await nftDetails.json();
+      const { name, description, image } = nftJson;
 
       return {
-        title,
+        title: name,
+        description: description,
         contract,
         tokenId: parseInt(tokenId),
-        imageUrl: tokenUri,
+        imageUrl: ipfsUrlToGatewayUrl(image),
       };
     })
   );
 };
 
 const ipfsUrlToGatewayUrl = (url: string): string => {
-  const urlObj = new URL(url);
-  return `https://ipfs.io/ipfs/${urlObj.host}`;
+  const hash = url.replace("ipfs://", "");
+  return `https://ipfs.io/ipfs/${hash}`;
 };
