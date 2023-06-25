@@ -175,13 +175,16 @@ const AuctionCard = (
               View on etherscan <GoCodescan />
             </div>
           </Link>
-          <Button >
-            See auction details
-          </Button>
+          <Link
+            href={`/buy/${auctionAddress}`}>
+            <Button>
+              See auction details
+            </Button>
+          </Link>
         </div>
       </div>
 
-    </div>
+    </div >
   );
 };
 
