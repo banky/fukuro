@@ -9,19 +9,19 @@ import { useAccount, useChainId } from "wagmi";
 import { fetchERC721Balances } from "../../../utils/alchemy";
 import { Token } from "../../../utils/subgraph";
 import { SiOpensea } from "react-icons/si";
-import { BiArrowBack } from 'react-icons/bi'
+import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
 import { OPENSEA_URL } from "../../../utils/constants";
 import { Auction } from "../../../components/Auction";
 import { NFTList } from "../../../components/NFTList";
 
 const MOCK_AUCTION_DATA = {
-  state: 'active',
+  state: "active",
   highestBid: 400,
-  highestBidder: '0x123',
-}
+  highestBidder: "0x123",
+};
 
-export function Page() {
+function Page() {
   const pathName = usePathname();
   const auctionAddress = pathName.replace("/buy/", "");
 
@@ -29,7 +29,7 @@ export function Page() {
   const chainId = useChainId();
 
   const [minBid, setMinBid] = useState(0);
-  const startAuction = async () => { };
+  const startAuction = async () => {};
 
   return (
     <div className=" min-h-screen">
@@ -40,14 +40,10 @@ export function Page() {
               <BiArrowBack /> Go back
             </div>
           </Link>
-          <h1 className="text-center text-2xl">
-            Auction for {auctionAddress}
-          </h1>
+          <h1 className="text-center text-2xl">Auction for {auctionAddress}</h1>
           <NFTList />
           <Auction auction={MOCK_AUCTION_DATA} />
-
         </div>
-
       </div>
     </div>
   );
