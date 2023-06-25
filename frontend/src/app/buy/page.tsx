@@ -2,7 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import { AFROPOLITAN_ADDRESS, BLOCK_EXPLORER_URL, OPENSEA_URL } from "../../utils/constants";
 import { GoCodescan } from 'react-icons/go'
-import { NFTList } from "../../components/NFTList";
+import { ethers } from "ethers";
+import { Button } from "../../components/Button";
+
 
 function Page() {
   const auctions = [
@@ -13,7 +15,8 @@ function Page() {
       title: "Auction",
       startBlock: 1,
       endBlock: 100,
-      bidIncrement: 100000,
+      highestBid: ethers.utils.parseUnits("0.1", "ether").toString(),
+      bidIncrement: ethers.utils.parseUnits("0.11", "ether").toString(),
     },
     {
       tokenId: 26,
@@ -22,7 +25,8 @@ function Page() {
       title: "Auction",
       startBlock: 1,
       endBlock: 100,
-      bidIncrement: 100000,
+      highestBid: ethers.utils.parseUnits("0.2", "ether").toString(),
+      bidIncrement: ethers.utils.parseUnits("0.12", "ether").toString(),
     },
     {
       tokenId: 26,
@@ -31,7 +35,8 @@ function Page() {
       title: "Auction",
       startBlock: 1,
       endBlock: 100,
-      bidIncrement: 100000,
+      highestBid: ethers.utils.parseUnits("0.15", "ether").toString(),
+      bidIncrement: ethers.utils.parseUnits("0.15", "ether").toString(),
     }
   ]
 
@@ -54,6 +59,7 @@ function Page() {
                 startBlock={activeAuction.startBlock}
                 endBlock={activeAuction.endBlock}
                 bidIncrement={activeAuction.bidIncrement}
+                highestBid={activeAuction.highestBid}
               />
             </>))}
         </div>
@@ -68,10 +74,15 @@ interface AuctionProps {
   title: string;
   startBlock: number;
   endBlock: number;
-  bidIncrement: number;
+  bidIncrement: string;
+  highestBid: string;
 }
 
-const AuctionCard = ({ auctionAddress, title, imageUrl, startBlock, endBlock, bidIncrement }: AuctionProps) => {
+const AuctionCard = ({ auctionAddress, title, highestBid, imageUrl, startBlock, endBlock, bidIncrement }: AuctionProps) => {
+
+  const bidIncrementEth = ethers.utils.formatEther(bidIncrement.toString());
+  const highestBidEth = ethers.utils.formatEther(highestBid.toString());
+
   return (
     <div className="my-2">
       <Link href={`/buy/${auctionAddress}`}>
@@ -85,7 +96,7 @@ const AuctionCard = ({ auctionAddress, title, imageUrl, startBlock, endBlock, bi
             <div className="flex mb-4">
               <Image src={imageUrl} width={200} height={200} alt="" />
             </div>
-            <div className="text-xl">
+            <div className="text-l">
               <div>
                 Start time: {startBlock}
               </div>
@@ -95,11 +106,15 @@ const AuctionCard = ({ auctionAddress, title, imageUrl, startBlock, endBlock, bi
               </div>
               <br />
               <div>
-                Bid increment: {bidIncrement}
+                Bid increment: {bidIncrementEth} ETH
+              </div>
+              <br />
+              <div>
+                Highest bid: {highestBidEth} ETH
               </div>
             </div>
           </div>
-          <div className="justify-center">
+          <div className="flex gap-8 items-center justify-center">
             <Link
               href={`${BLOCK_EXPLORER_URL}/address/${auctionAddress}`}
               target="_blank"
@@ -108,6 +123,9 @@ const AuctionCard = ({ auctionAddress, title, imageUrl, startBlock, endBlock, bi
                 View on etherscan <GoCodescan />
               </div>
             </Link>
+            <Button >
+              See details
+            </Button>
           </div>
         </div>
       </Link>
