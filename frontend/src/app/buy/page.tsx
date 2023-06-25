@@ -1,12 +1,13 @@
 import Image from "next/image";
 import Link from "next/link";
-import { OPENSEA_URL } from "../../utils/constants";
+import { BLOCK_EXPLORER_URL, OPENSEA_URL } from "../../utils/constants";
+import { GoCodescan } from 'react-icons/go'
 
 function Page() {
   const auctions = [
     {
       tokenId: 1,
-      tokenAddress: "0x123",
+      auctionAddress: "0x123",
       imageUrl: "https://ipfs.io/ipfs/bafybeifcetut4fgnlmquws3c2jddt5i72vlculluw3tdyls7qiv2ixquum",
       title: "My first bundle",
       startBlock: 1,
@@ -28,11 +29,10 @@ function Page() {
           {activeAuctions.map((activeAuction) => (
             <>
               <AuctionCard
-                key={`${activeAuction.tokenAddress}:${activeAuction.tokenId}`}
+                key={`${activeAuction.auctionAddress}:${activeAuction.tokenId}`}
                 imageUrl={activeAuction.imageUrl}
                 title={activeAuction.title}
-                tokenId={activeAuction.tokenId}
-                tokenAddress={activeAuction.tokenAddress}
+                auctionAddress={activeAuction.auctionAddress}
                 startBlock={activeAuction.startBlock}
                 endBlock={activeAuction.endBlock}
                 bidIncrement={activeAuction.bidIncrement}
@@ -45,8 +45,7 @@ function Page() {
 }
 
 interface AuctionProps {
-  tokenId: number;
-  tokenAddress: string;
+  auctionAddress: string;
   imageUrl: string;
   title: string;
   startBlock: number;
@@ -54,25 +53,28 @@ interface AuctionProps {
   bidIncrement: number;
 }
 
-const AuctionCard = ({ tokenId, tokenAddress, title, imageUrl, startBlock, endBlock, bidIncrement }: AuctionProps) => {
+const AuctionCard = ({ auctionAddress, title, imageUrl, startBlock, endBlock, bidIncrement }: AuctionProps) => {
   return (
-    <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
-      <div className="mb-4">
-        <h1 className="text-lg">
-          {title} #{tokenId}
-        </h1>
+    <Link href={`/buy/${auctionAddress}`}>
+      <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
+        <div className="mb-4">
+          <h1 className="text-lg">
+            {title}
+          </h1>
+        </div>
+        <div className="flex mb-4">
+          <Image src={imageUrl} width={150} height={150} alt="" />
+        </div>
+        <div className="flex justify-center">
+          <Link
+            href={`${BLOCK_EXPLORER_URL}/address/${auctionAddress}`}
+            target="_blank"
+          >
+            <GoCodescan />
+          </Link>
+        </div>
       </div>
-      <div className="flex mb-4">
-        <Image src={imageUrl} width={150} height={150} alt="" />
-      </div>
-      <div className="flex justify-center">
-        <Link
-          href={`${OPENSEA_URL}/${tokenAddress}/${tokenId}`}
-          target="_blank"
-        >
-        </Link>
-      </div>
-    </div>
+    </Link>
   );
 };
 
