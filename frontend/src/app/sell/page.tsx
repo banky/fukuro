@@ -8,22 +8,24 @@ export function Page() {
 
   return (
     <>
-      <h1 className="text-center text-4xl">
-        Select which of your bundles you&apos;d like to sell
-      </h1>
-      <div className="grid grid-cols-4 mt-8 gap-4 max-w-4xl mx-auto">
-        {tokens.map((token) => {
-          return (
-            <TokenCard
-              key={`${token.contract}${token.tokenId}`}
-              imageUrl={token.imageUrl}
-              title={token.title}
-              description={token.description}
-              tokenId={token.tokenId}
-              tokenAddress={token.contract}
-            />
-          );
-        })}
+      <div className="max-w-4xl min-h-screen mx-auto ">
+        <h1 className="text-center text-4xl">
+          Select which of your bundles you&apos;d like to sell
+        </h1>
+        <div className="grid grid-cols-4 mt-8 gap-4 max-w-4xl mx-auto">
+          {tokens.map((token) => {
+            return (
+              <TokenCard
+                key={`${token.contract}${token.tokenId}`}
+                imageUrl={token.imageUrl}
+                title={token.title}
+                description={token.description}
+                tokenId={token.tokenId}
+                tokenAddress={token.contract}
+              />
+            );
+          })}
+        </div>
       </div>
     </>
   );

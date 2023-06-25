@@ -1,0 +1,39 @@
+{
+  "transactions": [
+    {
+      "hash": "0x6af3a48aa8c8094fb1948976e4df86ef644bbf388dc00c354425da8ae84de7a7",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "mintTo(address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "10"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0x612cc",
+        "value": "0x470de4df820000",
+        "data": "0x449a52f800000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b000000000000000000000000000000000000000000000000000000000000000a",
+        "nonce": "0x42",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0x6af3a48aa8c8094fb1948976e4df86ef644bbf388dc00c354425da8ae84de7a7"
+  ],
+  "path": "/Users/jaclyn/Documents/code/fukuro/contracts/broadcast/MintAfropolitans.s.sol/5/run-latest.json",
+  "returns": {},
+  "timestamp": 1687651355,
+  "chain": 5,
+  "multi": false,
+  "commit": "3eca4b7"
+}
