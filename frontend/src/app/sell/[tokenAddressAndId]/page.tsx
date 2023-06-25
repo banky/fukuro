@@ -5,7 +5,12 @@ import { useEffect, useState } from "react";
 import { Button } from "../../../components/Button";
 import { usePathname } from "next/navigation";
 import { useAccountOwnedByToken } from "../../../hooks/useAccountOwnedByToken";
-import { useAccount, useChainId, useContractWrite } from "wagmi";
+import {
+  useAccount,
+  useBlockNumber,
+  useChainId,
+  useContractWrite,
+} from "wagmi";
 import { fetchERC721Balances } from "../../../utils/alchemy";
 import { Token } from "../../../utils/subgraph";
 import { SiOpensea } from "react-icons/si";
@@ -15,13 +20,14 @@ import { OPENSEA_URL } from "../../../utils/constants";
 import { Input } from "../../../components/Input";
 import AuctionFactory from "../../../../../contracts/out/AuctionFactory.sol/AuctionFactory.json";
 
+const NUM_BLOCKS_IN_A_DAY = (24 * 60 * 60) / 12;
+
 export function Page() {
   const pathName = usePathname();
   const tokenAddressAndId = pathName.replace("/sell/", "");
   const [tokenAddress, tokenId] = tokenAddressAndId.split(":");
 
   const accountOwnedByToken = useAccountOwnedByToken(tokenAddress, tokenId);
-  console.log("accountOwnedByToken", accountOwnedByToken);
 
   const { address } = useAccount();
   const chainId = useChainId();
@@ -59,13 +65,27 @@ export function Page() {
   const [minBidIncrement, setMinBidIncrement] = useState(0);
   const [bidDuration, setBidDuration] = useState(0); // In days
 
-  const { data, isLoading, isSuccess, write } = useContractWrite({
-    address: "0xecb504d39723b0be0e3a9aa33d646642d1051ee1",
+  const { data, isLoading, isSuccess, writeAsync } = useContractWrite({
+    address: "0xb16916Fc4c5bCb989b9e2c1e73Ed56b74003dbE2",
     abi: AuctionFactory.abi,
-    functionName: "feed",
+    functionName: "createAuction",
   });
+  const { refetch: refetchBlockNumber } = useBlockNumber();
 
-  const startAuction = async () => {};
+  const startAuction = async () => {
+    const blockNumberResult = await refetchBlockNumber();
+    // if it's not available, use a bigg number lol
+    const blockNumber = blockNumberResult.data ?? BigInt(10000000);
+
+    const startBlock = blockNumber + BigInt(1);
+    const endBlock = BigInt(bidDuration * NUM_BLOCKS_IN_A_DAY);
+
+    // Start block is current block + 1
+    // End block is current block plus duration (days) in blocks
+    await writeAsync({
+      args: [minBidIncrement, startBlock, endBlock, accountOwnedByToken],
+    });
+  };
 
   return (
     <div className=" min-h-screen">
@@ -98,8 +118,8 @@ export function Page() {
             <Input
               value={minBidIncrement || ""}
               onChange={(e) => setMinBidIncrement(Number(e.target.value))}
-              placeholder="0.69"
-              label="Minimum bid increment (in ETH)"
+              placeholder="69420"
+              label="Minimum bid increment (in wei)"
               type="number"
             />
             <Input
