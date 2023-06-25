@@ -5,18 +5,15 @@ import { useOwnedTokens } from "../../hooks/useOwnedTokens";
 import { OPENSEA_URL } from "../../utils/constants";
 import { SiOpensea } from "react-icons/si";
 
-
-export function Page() {
+function Page() {
   const { loading, error, tokens } = useOwnedTokens();
 
   if (loading) {
     <>
       <div className="max-w-4xl min-h-50 mx-auto ">
-        <h1 className="my-8 text-center text-xl">
-          loading...
-        </h1>
+        <h1 className="my-8 text-center text-xl">loading...</h1>
       </div>
-    </>
+    </>;
   }
 
   return (
