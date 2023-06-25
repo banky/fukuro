@@ -8,7 +8,7 @@ export const Button = (
 ) => {
   return (
     <button
-      className="bg-purple-500 px-2 rounded-md hover:scale-105 transition"
+      className="bg-purple-500 px-2 py-2 rounded-md hover:scale-105 transition"
       {...props}
     />
   );
