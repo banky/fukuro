@@ -8,14 +8,32 @@ import { useAccountOwnedByToken } from "../../../hooks/useAccountOwnedByToken";
 import { useAccount, useChainId } from "wagmi";
 import { fetchERC721Balances } from "../../../utils/alchemy";
 import { Token } from "../../../utils/subgraph";
+import { SiOpensea } from "react-icons/si";
+import Link from "next/link";
+import { OPENSEA_URL } from "../../../utils/constants";
 
 export function Page() {
-  const token = {
-    imageUrl: "https://picsum.photos/500/500",
-    title: "Bundles",
-    tokenAddress: "0x123",
-    tokenId: 1,
-  };
+  // const tokens = [
+  //   {
+  //     imageUrl: "https://ipfs.io/ipfs/bafybeido3vjv6t2p7ijpdsa3qlpsejksv6js225g7bjt7zv67hfovjgqcq",
+  //     title: "Afropolitan",
+  //     tokenAddress: "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+  //     tokenId: 26,
+  //   },
+  //   {
+  //     imageUrl: "https://ipfs.io/ipfs/bafybeid4blrpjudmqu7eborxklbnonoopqmm7opymlpfrgubw5ctt7m2c4",
+  //     title: "Afropolitan",
+  //     tokenAddress: "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+  //     tokenId: 27,
+  //   },
+  //   {
+  //     imageUrl: "https://ipfs.io/ipfs/bafybeiaq4xzwux7qw7mbp5jdz3xivac4s4y2uixqj3lzbxeomcyzw4paaq",
+  //     title: "Afropolitan",
+  //     tokenAddress: "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+  //     tokenId: 28,
+  //   }
+  // ];
+
   const pathName = usePathname();
   const tokenAddressAndId = pathName.replace("/sell/", "");
   const [tokenAddress, tokenId] = tokenAddressAndId.split(":");
@@ -62,27 +80,11 @@ export function Page() {
 
   return (
     <div>
-      <div className="mb-4">
-        <h1 className="text-lg">{token.title}</h1>
-        <p>#{token.tokenId}</p>
-      </div>
-      <div className="flex gap-4">
-        <div className="w-full">
-          <Image src={token.imageUrl} width={500} height={500} alt="" />
-        </div>
-
-        <div className="w-full">
-          <h1 className="text-lg">Items in wallet</h1>
-          {ownedTokens.map((ownedToken) => {
-            return (
-              <ChildERC721
-                key={`${ownedToken.contract}:${ownedToken.tokenId}`}
-                token={ownedToken}
-              />
-            );
-          })}
-        </div>
-        <div className=""></div>
+      <h1 className="text-center text-2xl">Items in wallet</h1>
+      <div className="grid grid-cols-4 mt-8 gap-4 max-w-4xl mx-auto">
+        {ownedTokens.map((token) => {
+          return <ChildERC721 key={`${token.tokenId}`} token={token} />;
+        })}
       </div>
 
       <div className="my-8 flex gap-4 w-fit mx-auto">
@@ -99,11 +101,30 @@ export function Page() {
 }
 
 const ChildERC721 = ({ token }: { token: Token }) => {
-  const { imageUrl, title, tokenId, description } = token;
+  const {
+    imageUrl,
+    title,
+    tokenId,
+    description,
+    contract: tokenAddress,
+  } = token;
   return (
-    <div className="bg-purple-950 opacity-60  rounded-xl">
-      <div className="flex">
-        <Image src={imageUrl} width={50} height={50} alt="" />
+    <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
+      <div className="mb-4">
+        <h1 className="text-lg">
+          {title} #{tokenId}
+        </h1>
+      </div>
+      <div className="flex mb-4">
+        <Image src={imageUrl} width={500} height={500} alt="" />
+      </div>
+      <div className="flex justify-center">
+        <Link
+          href={`${OPENSEA_URL}/${tokenAddress}/${tokenId}`}
+          target="_blank"
+        >
+          <SiOpensea />
+        </Link>
       </div>
     </div>
   );
@@ -113,6 +134,7 @@ type ChildERC20Props = {
   symbol: string;
   balance: BigInt;
 };
+
 const ChildERC20 = ({ symbol, balance }: ChildERC20Props) => {
   return (
     <div className="bg-purple-950 opacity-60  rounded-xl">
