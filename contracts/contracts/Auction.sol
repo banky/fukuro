@@ -179,6 +179,7 @@ contract Auction is Ownable, IERC165 {
     {
         address withdrawalAccount;
         uint withdrawalAmount;
+        // lil bug here, if the user cancels, then all the bids are locked in the auction contract
         if (canceled) {
             withdrawalAccount = msg.sender;
             withdrawalAmount = fundsByBidder[withdrawalAccount];

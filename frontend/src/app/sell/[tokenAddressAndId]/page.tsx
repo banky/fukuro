@@ -22,7 +22,7 @@ import AuctionFactory from "../../../data/AuctionFactory.json";
 
 const NUM_BLOCKS_IN_A_DAY = (24 * 60 * 60) / 12;
 
-export function Page() {
+function Page() {
   const pathName = usePathname();
   const tokenAddressAndId = pathName.replace("/sell/", "");
   const [tokenAddress, tokenId] = tokenAddressAndId.split(":");
@@ -139,7 +139,11 @@ export function Page() {
             <Button onClick={() => startAuction()}>Start auction</Button>
           </div>
         )}
-        {isLoading && <div className="my-8 text-center">Pending transaction signature...</div>}
+        {isLoading && (
+          <div className="my-8 text-center">
+            Pending transaction signature...
+          </div>
+        )}
         {isSuccess && (
           <div className="text-center my-8">
             <div className="text-2xl">Success! Auction created</div>
@@ -161,9 +165,7 @@ const ChildERC721 = ({ token }: { token: Token }) => {
   return (
     <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
       <div className="mb-4">
-        <h1 className="text-lg">
-          {title} #{tokenId}
-        </h1>
+        <h1 className="text-lg">{title}</h1>
       </div>
       <div className="flex mb-4">
         <Image src={imageUrl} width={500} height={500} alt="" />
