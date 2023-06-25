@@ -18,7 +18,7 @@ import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
 import { OPENSEA_URL } from "../../../utils/constants";
 import { Input } from "../../../components/Input";
-import AuctionFactory from "../../../../../contracts/out/AuctionFactory.sol/AuctionFactory.json";
+import AuctionFactory from "../../../data/AuctionFactory.json";
 
 const NUM_BLOCKS_IN_A_DAY = (24 * 60 * 60) / 12;
 

@@ -41,3 +41,14 @@ export const getNFTContractDetails = async (
   const contractDetails = await alchemy.nft.getContractMetadata(address);
   return contractDetails;
 };
+
+export const getTokenDetails = async (
+  address: string,
+  tokenId: number,
+  chainId: number
+) => {
+  const alchemy = getAlchemySdk(chainId);
+
+  const tokenDetails = await alchemy.nft.getNftMetadata(address, tokenId);
+  return tokenDetails;
+};
