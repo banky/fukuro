@@ -13,6 +13,7 @@
     "@tokenbound/sdk": "^0.3.0",
     "alchemy-sdk": "^2.9.1",
     "connectkit": "^1.4.0",
+    "encoding": "^0.1.13",
     "graphql": "^16.7.1",
     "lokijs": "^1.5.12",
     "next": "^13.4.0",
@@ -30,6 +31,7 @@
     "autoprefixer": "^10.4.14",
     "eslint": "^8.15.0",
     "eslint-config-next": "^12.1.6",
+    "pino-pretty": "^10.0.0",
     "postcss": "^8.4.24",
     "tailwindcss": "^3.3.2",
     "typescript": "^5.0.4"
