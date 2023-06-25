@@ -33,7 +33,7 @@ export const Auction = ({ auction, startTimestampEstimate, endTimestampEstimate 
         fetchBlockNumber().then((blockNumber)=>setBlock(Number(blockNumber)))
     });
 
-    const timedOut = endTimestampEstimate - currentTime <0;
+    const timedOut = endTimestampEstimate !== BigInt(0) && endTimestampEstimate - currentTime <0;
     const notStarted = startBlock > block;
 
     const finished = canceled || finalized || timedOut;
