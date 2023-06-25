@@ -6,3 +6,4 @@ export const ERC6551_REGISTRY_ADDRESS =
 export const AUCTION_FACTORY = "0xb16916Fc4c5bCb989b9e2c1e73Ed56b74003dbE2";
 
 export const OPENSEA_URL = "https://testnets.opensea.io/assets/goerli";
+export const BLOCK_EXPLORER_URL = "https://goerli.etherscan.io/";

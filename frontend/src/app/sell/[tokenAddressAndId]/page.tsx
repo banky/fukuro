@@ -50,7 +50,7 @@ export function Page() {
     };
 
     fetchBalances();
-  }, [address, chainId]);
+  }, [accountOwnedByToken, address, chainId]);
 
   // const tokenAddressAndId = router.query.tokenAddressAndId as string;
   // const [tokenAddress, id] = tokenAddressAndId.split(":");
