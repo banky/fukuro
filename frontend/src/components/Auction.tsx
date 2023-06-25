@@ -40,31 +40,15 @@ export const Auction = ({ auction, endTimestampEstimate }: { auction: Auction, e
             </div>
             <div className="my-8 flex gap-4 w-fit mx-auto">
             <input
-              className="text-black px-4 py-2 rounded-md"
-              value={bid}
-              onChange={(e) => setBid(Number(e.target.value))}
-              placeholder="Enter a bid value"
-            />
-            <Button onClick={() => {
-                console.log("Place bid");
-            }} disabled={bid <= highestBid}>Place bid</Button>
-          </div>
-      <div className="my-8 flex gap-4 w-fit mx-auto">
-        <input
-          className="text-black px-4 py-2 rounded-md"
-          value={bid}
-          onChange={(e) => setBid(Number(e.target.value))}
-          placeholder="Enter a bid value"
-        />
-        <Button
-          onClick={() => {
-            console.log("Place bid");
-          }}
-          disabled={bid <= highestBid}
-        >
-          Place bid
-        </Button>
-      </div>
+                className="text-black px-4 py-2 rounded-md"
+                value={bid}
+                onChange={(e) => setBid(Number(e.target.value))}
+                placeholder="Enter a bid value"
+                />
+                <Button onClick={() => {
+                    console.log("Place bid");
+                }} disabled={bid <= highestBid}>Place bid</Button>
+            </div>
     </div>
   );
 };
