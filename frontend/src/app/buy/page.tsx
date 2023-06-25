@@ -8,12 +8,7 @@ import { ethers } from "ethers";
 import { Button } from "../../components/Button";
 import { useContractRead } from "wagmi";
 import AuctionFactory from "../../data/AuctionFactory.json";
-import Auction from "../../data/Auction.json";
-import Fukuro from "../../data/Fukuro.json";
-import { readContract } from '@wagmi/core'
 import { useEffect, useState } from "react";
-import { getTokenDetails } from "../../utils/alchemy";
-import { Nft } from "alchemy-sdk";
 import { HydratedAuction, hydrateAuction } from "../../components/Auction";
 
 function Page() {
@@ -48,40 +43,6 @@ function Page() {
     setActiveAuctions(_activeAuctions);
     setInactiveAuctions(_inactiveActions)
   }, [hydratedAuctions])
-
-  const auctions = [
-    {
-      tokenId: 26,
-      auctionAddress: AFROPOLITAN_ADDRESS,
-      imageUrl: "https://ipfs.io/ipfs/bafybeifcetut4fgnlmquws3c2jddt5i72vlculluw3tdyls7qiv2ixquum",
-      title: "Auction",
-      startBlock: 1,
-      endBlock: 100,
-      highestBid: ethers.utils.parseUnits("0.1", "ether").toString(),
-      bidIncrement: ethers.utils.parseUnits("0.11", "ether").toString(),
-    },
-    {
-      tokenId: 26,
-      auctionAddress: AFROPOLITAN_ADDRESS,
-      imageUrl: "https://ipfs.io/ipfs/bafybeid4blrpjudmqu7eborxklbnonoopqmm7opymlpfrgubw5ctt7m2c4",
-      title: "Auction",
-      startBlock: 1,
-      endBlock: 100,
-      highestBid: ethers.utils.parseUnits("0.2", "ether").toString(),
-      bidIncrement: ethers.utils.parseUnits("0.12", "ether").toString(),
-    },
-    {
-      tokenId: 26,
-      auctionAddress: AFROPOLITAN_ADDRESS,
-      imageUrl: "https://ipfs.io/ipfs/bafybeido3vjv6t2p7ijpdsa3qlpsejksv6js225g7bjt7zv67hfovjgqcq",
-      title: "Auction",
-      startBlock: 1,
-      endBlock: 100,
-      highestBid: ethers.utils.parseUnits("0.15", "ether").toString(),
-      bidIncrement: ethers.utils.parseUnits("0.15", "ether").toString(),
-    }
-  ]
-
 
   return (
     <>
@@ -138,7 +99,7 @@ const AuctionCard = (
 
   return (
     <div className="my-2">
-      <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
+      <div className="bg-gray-950 opacity-80 p-4 rounded-xl">
         <Link href={`/buy/${auctionAddress}`}>
           <div className="mb-4">
             <h1 className="text-lg">
@@ -166,7 +127,7 @@ const AuctionCard = (
             </div>
           </div>
         </Link>
-        <div className="flex gap-8 items-center justify-center">
+        <div className="flex gap-8 items-center justify-center mt-4 ">
           <Link
             href={`${BLOCK_EXPLORER_URL}/address/${auctionAddress}`}
             target="_blank"
@@ -187,5 +148,38 @@ const AuctionCard = (
     </div >
   );
 };
+
+const auctions = [
+  {
+    tokenId: 26,
+    auctionAddress: AFROPOLITAN_ADDRESS,
+    imageUrl: "https://ipfs.io/ipfs/bafybeifcetut4fgnlmquws3c2jddt5i72vlculluw3tdyls7qiv2ixquum",
+    title: "Auction",
+    startBlock: 1,
+    endBlock: 100,
+    highestBid: ethers.utils.parseUnits("0.1", "ether").toString(),
+    bidIncrement: ethers.utils.parseUnits("0.11", "ether").toString(),
+  },
+  {
+    tokenId: 26,
+    auctionAddress: AFROPOLITAN_ADDRESS,
+    imageUrl: "https://ipfs.io/ipfs/bafybeid4blrpjudmqu7eborxklbnonoopqmm7opymlpfrgubw5ctt7m2c4",
+    title: "Auction",
+    startBlock: 1,
+    endBlock: 100,
+    highestBid: ethers.utils.parseUnits("0.2", "ether").toString(),
+    bidIncrement: ethers.utils.parseUnits("0.12", "ether").toString(),
+  },
+  {
+    tokenId: 26,
+    auctionAddress: AFROPOLITAN_ADDRESS,
+    imageUrl: "https://ipfs.io/ipfs/bafybeido3vjv6t2p7ijpdsa3qlpsejksv6js225g7bjt7zv67hfovjgqcq",
+    title: "Auction",
+    startBlock: 1,
+    endBlock: 100,
+    highestBid: ethers.utils.parseUnits("0.15", "ether").toString(),
+    bidIncrement: ethers.utils.parseUnits("0.15", "ether").toString(),
+  }
+]
 
 export default Page;

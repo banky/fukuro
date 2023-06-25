@@ -6,6 +6,11 @@ import AuctionAbi from "../data/Auction.json";
 import Fukuro from "../data/Fukuro.json";
 import { getTokenDetails } from "../utils/alchemy";
 import { Nft } from "alchemy-sdk";
+import { ethers } from "ethers";
+import Image from "next/image";
+import { useContractWrite } from "wagmi";
+import { AUCTION_FACTORY } from "../utils/constants";
+
 
 type Auction = {
     state: string;
@@ -28,21 +33,46 @@ export interface HydratedAuction {
 
 
 export const Auction = ({ auction, endTimestampEstimate }: { auction: HydratedAuction, endTimestampEstimate: number }) => {
-    const { canceled, finalized, highestBid, highestBidder, bidIncrement } = auction;
-    const [bid, setBid] = useState(highestBid + bidIncrement);
+    const { canceled, finalized,
+        highestBid, highestBidder, bidIncrement, startBlock, endBlock,
+        parentNFT
+    } = auction;
+    const [bid, setBid] = useState(Math.max(0.02, Number(ethers.utils.formatEther(parseInt(highestBid) + parseInt(bidIncrement)))));
     const [currentTime, setCurrentTime] = useState(Date.now());
+
     useEffect(() => {
         setInterval(() => {
             setCurrentTime(Date.now());
         }, 1000);
     }, []);
+
+    const highestBidEth = ethers.utils.formatEther(highestBid.toString());
+    const bidIncrementEth = ethers.utils.formatEther(bidIncrement.toString());
+    const image = parentNFT.media[0].gateway as string;
+
+    const { data, isLoading, isSuccess, writeAsync } = useContractWrite({
+        address: auction.auctionAddress as any,
+        abi: AuctionAbi.abi,
+        functionName: "placeBid",
+    });
+
+    const placeBid = async () => {
+        const bidAmountWei = ethers.utils.parseUnits(bid.toString(), "ether") // Convert to wei
+        const writeFuncResult = await writeAsync({
+            value: bidAmountWei.toBigInt(),
+        });
+        console.log(writeFuncResult);
+    }
     return (
-        <div className="opacity-60 p-4 rounded-xl">
-            < div className="mb-4" >
-                <h1 className="text-lg">
-                    {canceled ? 'Canceled' : finalized ? 'Finalized' : 'Open'}
-                </h1>
-            </div >
+        <div className="p-4 rounded-xl">
+            <div className="flex justify-center items-center flex-col gap-4">
+                <Image src={image} width={300} height={300} alt="" />
+                <div className="mb-4">
+                    <h1 className="text-xl text-center">
+                        {canceled ? 'Canceled' : finalized ? 'Finalized' : 'Auction is open!'}
+                    </h1>
+                </div>
+            </div>
             <div className="flex mb-4">
                 <div className="flex flex-col">
                     {highestBid ?
@@ -53,10 +83,35 @@ export const Auction = ({ auction, endTimestampEstimate }: { auction: HydratedAu
                             No bids yet
                         </div>
                     }
+                    <br />
                     <div className="text-lg">
-                        Highest bidder: {highestBidder}
+                        Start time: {startBlock.toString()}
                     </div>
-                    <div>
+                    <br />
+                    <div className="text-lg">
+                        End time: {endBlock.toString()}
+                    </div>
+                    <br />
+                    {highestBid &&
+                        <>
+                            <div className="text-lg">
+                                Highest bidder: {highestBidder}
+                            </div>
+                            <br />
+                        </>
+                    }
+                    {highestBidEth &&
+                        <>
+                            <div className="text-lg">
+                                Highest bid: {highestBidEth}
+                            </div>
+                            <br />
+                        </>}
+                    <div className="text-lg">
+                        Bid increment: {bidIncrementEth} ETH
+                    </div>
+                    <br />
+                    <div className="text-lg">
                         Time left: {endTimestampEstimate === 0 ? '???' : (prettySeconds(Math.floor((endTimestampEstimate - currentTime) / 1000)))}
                     </div>
                 </div>
@@ -65,12 +120,11 @@ export const Auction = ({ auction, endTimestampEstimate }: { auction: HydratedAu
                 <input
                     className="text-black px-4 py-2 rounded-md"
                     value={bid}
-                    onChange={(e) => setBid(e.target.value)}
-                    placeholder="Enter a bid value"
+                    onChange={(e) => setBid(Number(e.target.value))}
+                    placeholder="Enter a bid value (ETH)"
                 />
-                <Button onClick={() => {
-                    console.log("Place bid");
-                }} disabled={bid <= highestBid}>Place bid</Button>
+                {isLoading ? <div className="text-lg">Loading...</div> : isSuccess ? <div className="text-lg">Successfully placed bid!</div> : null}
+                {!isLoading && !isSuccess && <Button onClick={placeBid} disabled={bid <= Number(highestBid)}>Place bid</Button>}
             </div>
         </div >
     );

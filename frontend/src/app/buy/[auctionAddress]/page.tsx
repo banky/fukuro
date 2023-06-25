@@ -65,9 +65,12 @@ export function Page() {
             </div>
           </Link>
           <h1 className="text-center text-2xl">Auction for {auction?.parentNFT.title} # {auction?.parentNFT.tokenId}</h1>
-          {auction ?
-            <Auction auction={auction} endTimestampEstimate={endTimestampEstimate} />
-            : <div>Loading...</div>}
+          <div className="mx-auto max-w-3xl">
+            {auction ?
+              <Auction auction={auction} endTimestampEstimate={endTimestampEstimate} />
+              :
+              <div className="text-2xl my-10 justify-center">Loading...</div>}
+          </div>
         </div>
       </div>
     </div>
