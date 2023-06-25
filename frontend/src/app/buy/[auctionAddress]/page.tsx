@@ -1,19 +1,11 @@
 "use client";
 
-import Image from "next/image";
 import { ethers } from "ethers";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { Button } from "../../../components/Button";
 import { usePathname } from "next/navigation";
-import { useAccountOwnedByToken } from "../../../hooks/useAccountOwnedByToken";
-import { useAccount, useChainId, useContractRead } from "wagmi";
-import { fetchERC721Balances } from "../../../utils/alchemy";
-import { Token } from "../../../utils/subgraph";
-import { SiOpensea } from "react-icons/si";
 import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
-import { AUCTIONS, OPENSEA_URL } from "../../../utils/constants";
-import { Auction, hydrateAuction } from "../../../components/Auction";
+import { Auction } from "../../../components/Auction";
 import { NFTList } from "../../../components/NFTList";
 import { AuctionsContext } from "../../../contexts/AuctionsContext";
 import { fetchBlockNumber } from "wagmi/actions";
