@@ -19,6 +19,7 @@ export function Page() {
   console.log({ tokenAddress, tokenId });
 
   const accountOwnedByToken = useAccountOwnedByToken(tokenAddress, tokenId);
+
   console.log({ accountOwnedByToken });
 
   // const tokenAddressAndId = router.query.tokenAddressAndId as string;
