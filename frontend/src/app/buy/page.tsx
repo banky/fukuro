@@ -144,17 +144,21 @@ const AuctionCard = (
   const bidIncrementEth = ethers.utils.formatEther(bidIncrement.toString());
   const highestBidEth = ethers.utils.formatEther(highestBid.toString());
 
+  const image = parentNFT.media[0].gateway as string;
+  const title = parentNFT.title;
+  const tokenId = parentNFT.tokenId;
+
   return (
     <div className="my-2">
       <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
         <Link href={`/buy/${auctionAddress}`}>
           <div className="mb-4">
             <h1 className="text-lg">
-              Open Auction
+              Open Auction: {title} #{tokenId}
             </h1>
           </div>
           <div className="flex gap-4">
-            {/* <Image src={parentNFT.tokenUri.raw} width={200} height={200} alt="" /> */}
+            <Image src={image} width={200} height={200} alt="" />
             <div className="text-l">
               <div>
                 Start time: {startBlock.toString()}
