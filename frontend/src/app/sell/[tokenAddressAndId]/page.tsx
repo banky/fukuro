@@ -165,9 +165,7 @@ const ChildERC721 = ({ token }: { token: Token }) => {
   return (
     <div className="bg-gray-950 opacity-60 p-4 rounded-xl">
       <div className="mb-4">
-        <h1 className="text-lg">
-          {title} #{tokenId}
-        </h1>
+        <h1 className="text-lg">{title}</h1>
       </div>
       <div className="flex mb-4">
         <Image src={imageUrl} width={500} height={500} alt="" />
