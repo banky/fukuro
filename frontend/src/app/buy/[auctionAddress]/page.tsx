@@ -27,7 +27,7 @@ export function Page() {
     <div className=" min-h-screen">
       <div className="flex flex-col justify-between">
         <div>
-          <Link href="/sell">
+          <Link href="/buy">
             <div className="flex justify-start gap-4 items-center">
               <BiArrowBack /> Go back
             </div>
