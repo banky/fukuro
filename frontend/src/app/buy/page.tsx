@@ -1,9 +1,11 @@
 export function Page() {
   return (
     <>
-      <h1 className="text-center text-6xl">
-        Buy and sell token bundles with ease
-      </h1>
+      <div className="max-w-4xl min-h-screen mx-auto ">
+        <h1 className="text-center text-6xl">
+          Buy and sell token bundles with ease
+        </h1>
+      </div>
     </>
   );
 }

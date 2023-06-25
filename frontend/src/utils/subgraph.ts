@@ -18,6 +18,9 @@ export const parseOwnedTokensResponse = async (
   if (!response) {
     return [];
   }
+  if (response.owners.length === 0) {
+    return [];
+  }
   const ownedTokens = response.owners[0].ownedTokens;
 
   return Promise.all(

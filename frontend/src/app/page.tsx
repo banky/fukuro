@@ -24,7 +24,7 @@ export function Page() {
 
   return (
     <>
-      <div className="max-w-4xl h-screen mx-auto ">
+      <div className="max-w-4xl min-h-screen mx-auto ">
         <h1 className="text-8xl mt-40 flex flex-wrap w-fit items-center justify-center">
           <div className="my-4">Buy and sell token</div>
           <div className="bg-purple-600 mx-4 my-4 p-4 py-2 rounded-xl">
