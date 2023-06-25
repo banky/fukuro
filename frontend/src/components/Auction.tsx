@@ -10,26 +10,7 @@ import { ethers } from "ethers";
 import Image from "next/image";
 import { useContractWrite } from "wagmi";
 import { AUCTION_FACTORY } from "../utils/constants";
-
-
-type Auction = {
-    state: string;
-    highestBid: number;
-    highestBidder: string;
-}
-
-export interface HydratedAuction {
-    auctionAddress: string;
-    startBlock: number;
-    endBlock: number;
-    bidIncrement: string;
-    canceled: boolean;
-    finalized: boolean;
-    highestBindingBid: string;
-    highestBidder: string;
-    highestBid: string;
-    parentNFT: Nft;
-}
+import { HydratedAuction } from "../hooks/useAuctions";
 
 
 export const Auction = ({ auction, endTimestampEstimate }: { auction: HydratedAuction, endTimestampEstimate: number }) => {
