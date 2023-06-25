@@ -12,5 +12,6 @@ export const config = createConfig(
     appName: "My wagmi + ConnectKit App",
     walletConnectProjectId,
     chains,
+    alchemyId: process.env.ALCHEMY_ID ?? "",
   })
 );
