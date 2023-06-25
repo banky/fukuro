@@ -65,7 +65,7 @@ export const Auction = ({ auction, endTimestampEstimate }: { auction: HydratedAu
                 <input
                     className="text-black px-4 py-2 rounded-md"
                     value={bid}
-                    onChange={(e) => setBid(Number(e.target.value))}
+                    onChange={(e) => setBid(e.target.value)}
                     placeholder="Enter a bid value"
                 />
                 <Button onClick={() => {
