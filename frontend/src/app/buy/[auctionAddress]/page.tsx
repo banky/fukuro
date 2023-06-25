@@ -13,14 +13,11 @@ import { SiOpensea } from "react-icons/si";
 import { BiArrowBack } from "react-icons/bi";
 import Link from "next/link";
 import { AUCTIONS, OPENSEA_URL } from "../../../utils/constants";
-import {
-  Auction,
-  HydratedAuction,
-  hydrateAuction,
-} from "../../../components/Auction";
+import { Auction, hydrateAuction } from "../../../components/Auction";
 import { NFTList } from "../../../components/NFTList";
 import { AuctionsContext } from "../../../contexts/AuctionsContext";
 import { fetchBlockNumber } from "wagmi/actions";
+import { HydratedAuction } from "../../../hooks/useAuctions";
 
 function Page() {
   const { activeAuctions, inactiveAuctions, loading } = useContext(
@@ -86,7 +83,7 @@ function Page() {
             "Loading..."
           ) : (
             <Auction
-              auction={auction}
+              auction={auction as HydratedAuction}
               startTimestampEstimate={startTimestampEstimate}
               endTimestampEstimate={endTimestampEstimate}
             />
