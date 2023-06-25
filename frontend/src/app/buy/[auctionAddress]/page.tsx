@@ -12,6 +12,14 @@ import { SiOpensea } from "react-icons/si";
 import { BiArrowBack } from 'react-icons/bi'
 import Link from "next/link";
 import { OPENSEA_URL } from "../../../utils/constants";
+import { Auction } from "../../../components/Auction";
+import { NFTList } from "../../../components/NFTList";
+
+const MOCK_AUCTION_DATA = {
+  state: 'active',
+  highestBid: 400,
+  highestBidder: '0x123',
+}
 
 export function Page() {
   const pathName = usePathname();
@@ -35,6 +43,8 @@ export function Page() {
           <h1 className="text-center text-2xl">
             Auction for {auctionAddress}
           </h1>
+          <NFTList />
+          <Auction auction={MOCK_AUCTION_DATA} />
 
         </div>
 
