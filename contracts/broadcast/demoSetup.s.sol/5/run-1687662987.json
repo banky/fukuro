@@ -1,0 +1,379 @@
+{
+  "transactions": [
+    {
+      "hash": "0x4390051093d9a7d3ce6795d288734eb093967a39096f8eae7de2ded85334ea15",
+      "transactionType": "CALL",
+      "contractName": "ERC6551Registry",
+      "contractAddress": "0x02101dfB77FDE026414827Fdc604ddAF224F0921",
+      "function": "createAccount(address,uint256,address,uint256,uint256,bytes):(address)",
+      "arguments": [
+        "0xDA6c577241cB047628a370802D0CD20319F307B7",
+        "5",
+        "0xA6d32Be299C481c7C689b6f7238A1cE1b5A3213d",
+        "38",
+        "0",
+        "0x"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x02101dfb77fde026414827fdc604ddaf224f0921",
+        "gas": "0x207c8",
+        "value": "0x0",
+        "data": "0xda7323b3000000000000000000000000da6c577241cb047628a370802d0cd20319f307b70000000000000000000000000000000000000000000000000000000000000005000000000000000000000000a6d32be299c481c7c689b6f7238a1ce1b5a3213d0000000000000000000000000000000000000000000000000000000000000026000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x8e",
+        "accessList": []
+      },
+      "additionalContracts": [
+        {
+          "transactionType": "CREATE2",
+          "address": "0x51aAE2e625aB2b03E2879023857030b3fE3f03F8",
+          "initCode": "3d60ad80600a3d3981f3363d3d373d3d3d363d73da6c577241cb047628a370802d0cd20319f307b75af43d82803e903d91602b57fd5bf300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005000000000000000000000000a6d32be299c481c7c689b6f7238a1ce1b5a3213d0000000000000000000000000000000000000000000000000000000000000026"
+        }
+      ],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x220e364194920fc00fb8d548297ab4ab82e701aa57d080dc6cf80c2ba73a541e",
+      "transactionType": "CALL",
+      "contractName": "ERC6551Registry",
+      "contractAddress": "0x02101dfB77FDE026414827Fdc604ddAF224F0921",
+      "function": "createAccount(address,uint256,address,uint256,uint256,bytes):(address)",
+      "arguments": [
+        "0xDA6c577241cB047628a370802D0CD20319F307B7",
+        "5",
+        "0xA6d32Be299C481c7C689b6f7238A1cE1b5A3213d",
+        "39",
+        "0",
+        "0x"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x02101dfb77fde026414827fdc604ddaf224f0921",
+        "gas": "0x207c8",
+        "value": "0x0",
+        "data": "0xda7323b3000000000000000000000000da6c577241cb047628a370802d0cd20319f307b70000000000000000000000000000000000000000000000000000000000000005000000000000000000000000a6d32be299c481c7c689b6f7238a1ce1b5a3213d0000000000000000000000000000000000000000000000000000000000000027000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x8f",
+        "accessList": []
+      },
+      "additionalContracts": [
+        {
+          "transactionType": "CREATE2",
+          "address": "0x0151de4cB26dE1548Cc4fDDcBC616938e696Df7f",
+          "initCode": "3d60ad80600a3d3981f3363d3d373d3d3d363d73da6c577241cb047628a370802d0cd20319f307b75af43d82803e903d91602b57fd5bf300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005000000000000000000000000a6d32be299c481c7c689b6f7238a1ce1b5a3213d0000000000000000000000000000000000000000000000000000000000000027"
+        }
+      ],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xd3af347b426ceecd18f3177159650056f2ec6e8708e39ba027dcd5d878adaa58",
+      "transactionType": "CALL",
+      "contractName": "ERC6551Registry",
+      "contractAddress": "0x02101dfB77FDE026414827Fdc604ddAF224F0921",
+      "function": "createAccount(address,uint256,address,uint256,uint256,bytes):(address)",
+      "arguments": [
+        "0xDA6c577241cB047628a370802D0CD20319F307B7",
+        "5",
+        "0xA6d32Be299C481c7C689b6f7238A1cE1b5A3213d",
+        "40",
+        "0",
+        "0x"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x02101dfb77fde026414827fdc604ddaf224f0921",
+        "gas": "0x207c8",
+        "value": "0x0",
+        "data": "0xda7323b3000000000000000000000000da6c577241cb047628a370802d0cd20319f307b70000000000000000000000000000000000000000000000000000000000000005000000000000000000000000a6d32be299c481c7c689b6f7238a1ce1b5a3213d0000000000000000000000000000000000000000000000000000000000000028000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000c00000000000000000000000000000000000000000000000000000000000000000",
+        "nonce": "0x90",
+        "accessList": []
+      },
+      "additionalContracts": [
+        {
+          "transactionType": "CREATE2",
+          "address": "0x6C57A1c1B3D28301e58FceEf6dC232340EE8CF67",
+          "initCode": "3d60ad80600a3d3981f3363d3d373d3d3d363d73da6c577241cb047628a370802d0cd20319f307b75af43d82803e903d91602b57fd5bf300000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000005000000000000000000000000a6d32be299c481c7c689b6f7238a1ce1b5a3213d0000000000000000000000000000000000000000000000000000000000000028"
+        }
+      ],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x0071e5e2d6eec3c182f4ac694c912ec378703654133e62b55c367b931ffe6ef7",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x51aAE2e625aB2b03E2879023857030b3fE3f03F8",
+        "76"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0x1576b",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b00000000000000000000000051aae2e625ab2b03e2879023857030b3fe3f03f8000000000000000000000000000000000000000000000000000000000000004c",
+        "nonce": "0x91",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x1f64aa2625d98cdc9944524c0db637e4b5e56cd6bf8f8c780b309292df42d1fa",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x51aAE2e625aB2b03E2879023857030b3fE3f03F8",
+        "77"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xe813",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b00000000000000000000000051aae2e625ab2b03e2879023857030b3fe3f03f8000000000000000000000000000000000000000000000000000000000000004d",
+        "nonce": "0x92",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xcdd373625167fb088b15d92a22ff9b0cb994b23a183de7458d271449fb0e865a",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x51aAE2e625aB2b03E2879023857030b3fE3f03F8",
+        "78"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xe813",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b00000000000000000000000051aae2e625ab2b03e2879023857030b3fe3f03f8000000000000000000000000000000000000000000000000000000000000004e",
+        "nonce": "0x93",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xf49ecfaecdc3b96b0eda77ab8f8f1bbec4f519614058a25f2be054eae1110234",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x0151de4cB26dE1548Cc4fDDcBC616938e696Df7f",
+        "79"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0x1576b",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000000151de4cb26de1548cc4fddcbc616938e696df7f000000000000000000000000000000000000000000000000000000000000004f",
+        "nonce": "0x94",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x28d7328fa8d1669c3f8a0ad92710dabd6abdf82c1615fe62377e4ce53d54e24f",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x0151de4cB26dE1548Cc4fDDcBC616938e696Df7f",
+        "80"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xe813",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000000151de4cb26de1548cc4fddcbc616938e696df7f0000000000000000000000000000000000000000000000000000000000000050",
+        "nonce": "0x95",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xce01051695b6916f4e74b2e833f3e486c04c63bca22290e6b5ea9335954edb8a",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x0151de4cB26dE1548Cc4fDDcBC616938e696Df7f",
+        "81"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xe813",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000000151de4cb26de1548cc4fddcbc616938e696df7f0000000000000000000000000000000000000000000000000000000000000051",
+        "nonce": "0x96",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xf5bc4925c00b8d581545e747e9b95f0c96925f8a57adead3065104c1d1074994",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x0151de4cB26dE1548Cc4fDDcBC616938e696Df7f",
+        "82"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xe813",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000000151de4cb26de1548cc4fddcbc616938e696df7f0000000000000000000000000000000000000000000000000000000000000052",
+        "nonce": "0x97",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xbe5b3822caf558d60e630947031d313e2fbc7c4c4f0d01dd91fe49187dde9a46",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x6C57A1c1B3D28301e58FceEf6dC232340EE8CF67",
+        "83"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0x1576b",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000006c57a1c1b3d28301e58fceef6dc232340ee8cf670000000000000000000000000000000000000000000000000000000000000053",
+        "nonce": "0x98",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0xa5e90e4be41372b76e9053d2f16a9a953bc81909d4f0f60a79dc206186b8526d",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x6C57A1c1B3D28301e58FceEf6dC232340EE8CF67",
+        "84"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xe813",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000006c57a1c1b3d28301e58fceef6dc232340ee8cf670000000000000000000000000000000000000000000000000000000000000054",
+        "nonce": "0x99",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    },
+    {
+      "hash": "0x75636e02afef48012a5115b9bb41b54b51d15b72a07ad13db0664182772f862a",
+      "transactionType": "CALL",
+      "contractName": "AfropolitanNFT",
+      "contractAddress": "0x8E16e15381729fFEeDC4755f2Dcf6F5461f7F389",
+      "function": "transferFrom(address,address,uint256)",
+      "arguments": [
+        "0x85C91C3DfA5c200a6Ee9Bc9d3085d02A2c95908b",
+        "0x6C57A1c1B3D28301e58FceEf6dC232340EE8CF67",
+        "85"
+      ],
+      "rpc": "https://eth-goerli.g.alchemy.com/v2/B81B-tXiOVtE5bt8bJkX5Gqi3s2R1fgZ",
+      "transaction": {
+        "type": "0x02",
+        "from": "0x85c91c3dfa5c200a6ee9bc9d3085d02a2c95908b",
+        "to": "0x8e16e15381729ffeedc4755f2dcf6f5461f7f389",
+        "gas": "0xce2d",
+        "value": "0x0",
+        "data": "0x23b872dd00000000000000000000000085c91c3dfa5c200a6ee9bc9d3085d02a2c95908b0000000000000000000000006c57a1c1b3d28301e58fceef6dc232340ee8cf670000000000000000000000000000000000000000000000000000000000000055",
+        "nonce": "0x9a",
+        "accessList": []
+      },
+      "additionalContracts": [],
+      "isFixedGasLimit": false
+    }
+  ],
+  "receipts": [],
+  "libraries": [],
+  "pending": [
+    "0x4390051093d9a7d3ce6795d288734eb093967a39096f8eae7de2ded85334ea15",
+    "0x220e364194920fc00fb8d548297ab4ab82e701aa57d080dc6cf80c2ba73a541e",
+    "0xd3af347b426ceecd18f3177159650056f2ec6e8708e39ba027dcd5d878adaa58",
+    "0x0071e5e2d6eec3c182f4ac694c912ec378703654133e62b55c367b931ffe6ef7",
+    "0x1f64aa2625d98cdc9944524c0db637e4b5e56cd6bf8f8c780b309292df42d1fa",
+    "0xcdd373625167fb088b15d92a22ff9b0cb994b23a183de7458d271449fb0e865a",
+    "0xf49ecfaecdc3b96b0eda77ab8f8f1bbec4f519614058a25f2be054eae1110234",
+    "0x28d7328fa8d1669c3f8a0ad92710dabd6abdf82c1615fe62377e4ce53d54e24f",
+    "0xce01051695b6916f4e74b2e833f3e486c04c63bca22290e6b5ea9335954edb8a",
+    "0xf5bc4925c00b8d581545e747e9b95f0c96925f8a57adead3065104c1d1074994",
+    "0xbe5b3822caf558d60e630947031d313e2fbc7c4c4f0d01dd91fe49187dde9a46",
+    "0xa5e90e4be41372b76e9053d2f16a9a953bc81909d4f0f60a79dc206186b8526d",
+    "0x75636e02afef48012a5115b9bb41b54b51d15b72a07ad13db0664182772f862a"
+  ],
+  "path": "/Users/jaclyn/Documents/code/fukuro/contracts/broadcast/demoSetup.s.sol/5/run-latest.json",
+  "returns": {},
+  "timestamp": 1687662987,
+  "chain": 5,
+  "multi": false,
+  "commit": "3c35cda"
+}

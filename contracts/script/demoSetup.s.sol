@@ -22,7 +22,7 @@ contract DemoSetup is Script {
         );
         FukuFuku fuku = FukuFuku(0xA6d32Be299C481c7C689b6f7238A1cE1b5A3213d);
 
-        uint startFuku = 35;
+        uint startFuku = 38;
 
         // create 6551 accounts for fukus
         address accountAddress1 = registry.createAccount(
@@ -61,29 +61,29 @@ contract DemoSetup is Script {
 
         // send Afropolitans to fuku accounts
 
-        // uint start = 66;
-        // for (uint256 i = 0; i < 3; i++) {
-        //     afropolitan.transferFrom(seaportBurner, accountAddress1, start + i);
-        // }
-        // for (uint256 i = 0; i < 4; i++) {
-        //     afropolitan.transferFrom(
-        //         seaportBurner,
-        //         accountAddress2,
-        //         start + 3 + i
-        //     );
-        // }
-        // for (uint256 i = 0; i < 3; i++) {
-        //     afropolitan.transferFrom(
-        //         seaportBurner,
-        //         accountAddress3,
-        //         start + 7 + i
-        //     );
-        // }
+        uint start = 76;
+        for (uint256 i = 0; i < 3; i++) {
+            afropolitan.transferFrom(seaportBurner, accountAddress1, start + i);
+        }
+        for (uint256 i = 0; i < 4; i++) {
+            afropolitan.transferFrom(
+                seaportBurner,
+                accountAddress2,
+                start + 3 + i
+            );
+        }
+        for (uint256 i = 0; i < 3; i++) {
+            afropolitan.transferFrom(
+                seaportBurner,
+                accountAddress3,
+                start + 7 + i
+            );
+        }
 
         // send fukus
-        fuku.transferFrom(seaportBurner, straightupjac, 35);
-        fuku.transferFrom(seaportBurner, straightupjac, 36);
-        fuku.transferFrom(seaportBurner, straightupjac, 37);
+        // fuku.transferFrom(seaportBurner, straightupjac, 35);
+        // fuku.transferFrom(seaportBurner, straightupjac, 36);
+        // fuku.transferFrom(seaportBurner, straightupjac, 37);
 
         vm.stopBroadcast();
     }
