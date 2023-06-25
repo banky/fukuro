@@ -1,10 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Button } from "../../../components/Button";
 import { usePathname } from "next/navigation";
 import { useAccountOwnedByToken } from "../../../hooks/useAccountOwnedByToken";
+import { useAccount, useChainId } from "wagmi";
+import { fetchERC721Balances } from "../../../utils/alchemy";
+import { Token } from "../../../utils/subgraph";
 
 export function Page() {
   const token = {
@@ -16,11 +19,39 @@ export function Page() {
   const pathName = usePathname();
   const tokenAddressAndId = pathName.replace("/sell/", "");
   const [tokenAddress, tokenId] = tokenAddressAndId.split(":");
-  console.log({ tokenAddress, tokenId });
 
   const accountOwnedByToken = useAccountOwnedByToken(tokenAddress, tokenId);
 
-  console.log({ accountOwnedByToken });
+  const { address } = useAccount();
+  const chainId = useChainId();
+
+  const [ownedTokens, setOwnedTokens] = useState<Token[]>([]);
+
+  useEffect(() => {
+    const fetchBalances = async () => {
+      // const erc20Balances = await fetchERC20Balances(address, chainId);
+      const erc721Balances = await fetchERC721Balances(
+        accountOwnedByToken,
+        chainId
+      );
+
+      const tokens: Token[] = erc721Balances.ownedNfts.map((nft) => {
+        return {
+          title: nft.title,
+          description: nft.description,
+          contract: nft.contract.address,
+          imageUrl: nft.media[0].gateway,
+          tokenId: Number(nft.tokenId),
+        };
+      });
+
+      setOwnedTokens(tokens);
+    };
+
+    fetchBalances();
+  }, [address, chainId]);
+
+  console.log("ownedTokens", ownedTokens);
 
   // const tokenAddressAndId = router.query.tokenAddressAndId as string;
   // const [tokenAddress, id] = tokenAddressAndId.split(":");
@@ -42,6 +73,14 @@ export function Page() {
 
         <div className="w-full">
           <h1 className="text-lg">Items in wallet</h1>
+          {ownedTokens.map((ownedToken) => {
+            return (
+              <ChildERC721
+                key={`${ownedToken.contract}:${ownedToken.tokenId}`}
+                token={ownedToken}
+              />
+            );
+          })}
         </div>
         <div className=""></div>
       </div>
@@ -59,16 +98,12 @@ export function Page() {
   );
 }
 
-type ChildERC721Props = {
-  imageUrl: string;
-  title: string;
-  tokenId: number;
-};
-const ChildERC721 = ({ imageUrl, title, tokenId }: ChildERC721Props) => {
+const ChildERC721 = ({ token }: { token: Token }) => {
+  const { imageUrl, title, tokenId, description } = token;
   return (
     <div className="bg-purple-950 opacity-60  rounded-xl">
       <div className="flex">
-        <Image src={imageUrl} width={50} alt="" />
+        <Image src={imageUrl} width={50} height={50} alt="" />
       </div>
     </div>
   );

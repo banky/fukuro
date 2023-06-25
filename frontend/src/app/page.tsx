@@ -7,20 +7,6 @@ import { fetchERC20Balances, fetchERC721Balances } from "../utils/alchemy";
 export function Page() {
   const { address } = useAccount();
   const chainId = useChainId();
-  useEffect(() => {
-    const fetchBalances = async () => {
-      if (address === undefined) {
-        return;
-      }
-      // const erc20Balances = await fetchERC20Balances(address, chainId);
-      const erc721Balances = await fetchERC721Balances(
-        "0x1e57CdcbF15551744aee01ab016219E0C03C174b",
-        chainId
-      );
-    };
-
-    fetchBalances();
-  }, [address, chainId]);
 
   return (
     <>
