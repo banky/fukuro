@@ -1,4 +1,4 @@
-export function Page() {
+function Page() {
   return (
     <>
       <div className="max-w-4xl min-h-50 mx-auto ">
