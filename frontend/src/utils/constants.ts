@@ -55,3 +55,12 @@ export const LINEA_AfropolitanNFT =
 export const LINEA_Registry = "0x45E67155e2F6e8107Cd17905B1A9c3510cE3aCa1";
 export const LINEA_AuctionFactory =
   "0xA63872780B73BBD14C59dB6b0849c9550d44613B";
+
+// Polygon ZK EVM
+export const POLYGON_Fukuro = "0xd77A3312A0aE3c18b68B2426AF5A2b916Bbab4Ac";
+export const POLYGON_FukuFuku = "0xc90995B5897B2BA7ee2580FA6d978f3E5394cCe0";
+export const POLYGON_AfropolitanNFT =
+  "0xA6dBfAeD336F3586D5dc336f6E902803Ea0a9994";
+export const POLYGON_Registry = "0x45E67155e2F6e8107Cd17905B1A9c3510cE3aCa1";
+export const POLYGON_AuctionFactory =
+  "0xA63872780B73BBD14C59dB6b0849c9550d44613B";
