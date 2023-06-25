@@ -10,6 +10,7 @@ import { useContractRead } from "wagmi";
 import AuctionFactory from "../../data/AuctionFactory.json";
 import { useEffect, useState } from "react";
 import { HydratedAuction, hydrateAuction } from "../../components/Auction";
+import { fetchBlockNumber } from 'wagmi/actions'
 
 function Page() {
   const [hydratedAuctions, setHydratedAuctions] = useState<HydratedAuction[]>([])
@@ -37,11 +38,15 @@ function Page() {
   }, [auctionAddresses]);
 
   useEffect(() => {
-    const _activeAuctions = hydratedAuctions.filter((auction) => auction.canceled === false && auction.finalized === false);
-    const _inactiveActions = hydratedAuctions.filter((auction) => auction.canceled === true || auction.finalized === true);
+    async function updateAuctions() {
+      const block = await fetchBlockNumber()
+      const _activeAuctions = hydratedAuctions.filter((auction) => (auction.canceled === false && auction.finalized === false && auction.endBlock <= block));
+      const _inactiveActions = hydratedAuctions.filter((auction) => auction.canceled === true || auction.finalized === true || auction.endBlock > block);
 
-    setActiveAuctions(_activeAuctions);
-    setInactiveAuctions(_inactiveActions)
+      setActiveAuctions(_activeAuctions);
+      setInactiveAuctions(_inactiveActions)
+    }
+    updateAuctions()
   }, [hydratedAuctions])
 
   return (
@@ -50,8 +55,32 @@ function Page() {
         <h1 className="text-center text-6xl">
           Buy and sell token bundles with ease
         </h1>
+        <h1 className="mt-4 text-center text-4xl">
+          Open Auctions
+        </h1>
         <div className="grid grid-cols-2 mt-8 mb-4 gap-4 max-w-4xl mx-auto">
           {activeAuctions.map((auction) => (
+            <>
+              <AuctionCard
+                key={`${auction.auctionAddress}`}
+                auctionAddress={auction.auctionAddress}
+                startBlock={auction.startBlock}
+                endBlock={auction.endBlock}
+                bidIncrement={auction.bidIncrement}
+                highestBid={auction.highestBid}
+                highestBidder={auction.highestBidder}
+                highestBindingBid={auction.highestBindingBid}
+                canceled={auction.canceled}
+                finalized={auction.finalized}
+                parentNFT={auction.parentNFT}
+              />
+            </>))}
+        </div>
+        <h1 className="text-center text-4xl">
+          Past Auctions (Inactive)
+        </h1>
+        <div className="grid grid-cols-2 mt-8 mb-4 gap-4 max-w-4xl mx-auto">
+          {inactiveAuctions.map((auction) => (
             <>
               <AuctionCard
                 key={`${auction.auctionAddress}`}
