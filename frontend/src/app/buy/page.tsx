@@ -14,19 +14,7 @@ import { readContract } from '@wagmi/core'
 import { useEffect, useState } from "react";
 import { getTokenDetails } from "../../utils/alchemy";
 import { Nft } from "alchemy-sdk";
-
-interface HydratedAuction {
-  auctionAddress: string;
-  startBlock: number;
-  endBlock: number;
-  bidIncrement: string;
-  canceled: boolean;
-  finalized: boolean;
-  highestBindingBid: string;
-  highestBidder: string;
-  highestBid: string;
-  parentNFT: Nft;
-}
+import { HydratedAuction, hydrateAuction } from "../../components/Auction";
 
 function Page() {
   const [hydratedAuctions, setHydratedAuctions] = useState<HydratedAuction[]>([])
@@ -188,7 +176,7 @@ const AuctionCard = (
             </div>
           </Link>
           <Button >
-            See details
+            See auction details
           </Button>
         </div>
       </div>
@@ -196,89 +184,5 @@ const AuctionCard = (
     </div>
   );
 };
-
-const hydrateAuction = async (auctionAddress: string) => {
-  const startBlock = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'startBlock',
-    chainId: 5,
-  })
-  const endBlock = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'endBlock',
-    chainId: 5,
-  })
-  const bidIncrement = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'bidIncrement',
-    chainId: 5,
-  })
-
-  const canceled = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'canceled',
-    chainId: 5,
-  })
-  const finalized = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'finalized',
-    chainId: 5,
-  })
-  const highestBindingBid = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'highestBindingBid',
-    chainId: 5,
-  })
-  const highestBid = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'getHighestBid',
-    chainId: 5,
-  })
-  const highestBidder = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'highestBidder',
-    chainId: 5,
-  })
-  const tokenboundContract = await readContract({
-    address: auctionAddress as any,
-    abi: Auction.abi,
-    functionName: 'tokenboundContract',
-    chainId: 5,
-  })
-
-  const parent = await readContract({
-    address: tokenboundContract as any,
-    abi: Fukuro.abi,
-    functionName: 'token',
-    chainId: 5,
-  })
-
-  const [chainId, parentContract, tokenId] = parent as any[];
-  console.log("~~~~~ tokenbound and parent", tokenboundContract, parent, chainId, parentContract, tokenId)
-
-  const parentNFT = await getTokenDetails(parentContract, parseInt(tokenId), parseInt(chainId));
-  console.log("~~~~~ nftData", parentNFT)
-
-  return {
-    auctionAddress,
-    startBlock,
-    endBlock,
-    bidIncrement,
-    canceled,
-    finalized,
-    highestBindingBid,
-    highestBidder,
-    highestBid,
-    parentNFT
-  }
-}
 
 export default Page;
