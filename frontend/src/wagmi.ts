@@ -4,7 +4,7 @@ import { mainnet, polygon, optimism, arbitrum, goerli } from "wagmi/chains";
 
 const chains = [mainnet, polygon, optimism, arbitrum, goerli];
 
-const walletConnectProjectId = "E2Tz_Lz5Ydn66IoGgI4fmc52XiGQlzsu";
+const walletConnectProjectId = "fd344170c03ad73d6eb7db84d991763d";
 
 export const config = createConfig(
   getDefaultConfig({
