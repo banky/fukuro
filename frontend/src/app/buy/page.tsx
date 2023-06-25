@@ -1,54 +1,16 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { AFROPOLITAN_ADDRESS, AUCTION_FACTORY, BLOCK_EXPLORER_URL } from "../../utils/constants";
+import { BLOCK_EXPLORER_URL } from "../../utils/constants";
 import { GoCodescan } from 'react-icons/go'
 import { ethers } from "ethers";
 import { Button } from "../../components/Button";
-import { useContractRead } from "wagmi";
-import AuctionFactory from "../../data/AuctionFactory.json";
-import { useEffect, useState } from "react";
-import { HydratedAuction, hydrateAuction } from "../../components/Auction";
-import { fetchBlockNumber } from 'wagmi/actions'
+import { HydratedAuction } from "../../hooks/useAuctions";
+import { AuctionsContext } from "../../contexts/AuctionsContext";
+import { useContext } from "react";
 
 function Page() {
-  const [hydratedAuctions, setHydratedAuctions] = useState<HydratedAuction[]>([])
-  const [activeAuctions, setActiveAuctions] = useState<HydratedAuction[]>([])
-  const [inactiveAuctions, setInactiveAuctions] = useState<HydratedAuction[]>([])
-
-  const { data: auctionAddresses, isError, isLoading } = useContractRead({
-    address: AUCTION_FACTORY,
-    abi: AuctionFactory.abi,
-    functionName: 'getAuctions',
-  })
-
-  useEffect(() => {
-    const fetchAuctions = async () => {
-      const _hydratedAuctions = await Promise.all(
-        (auctionAddresses as any[]).map(async (auctionAddress: string) => {
-          return await hydrateAuction(auctionAddress);
-        })
-      );
-      setHydratedAuctions(_hydratedAuctions as HydratedAuction[]);
-      console.log('hydratedAuctions', _hydratedAuctions);
-    };
-
-    fetchAuctions();
-  }, [auctionAddresses]);
-
-  useEffect(() => {
-    async function updateAuctions() {
-      const block = await fetchBlockNumber()
-      const _activeAuctions = hydratedAuctions.filter((auction) => (auction.canceled === false && auction.finalized === false && auction.endBlock <= block));
-      const _inactiveActions = hydratedAuctions.filter((auction) => auction.canceled === true || auction.finalized === true || auction.endBlock > block);
-
-      setActiveAuctions(_activeAuctions);
-      setInactiveAuctions(_inactiveActions)
-    }
-    updateAuctions()
-  }, [hydratedAuctions])
-
+  const {activeAuctions, inactiveAuctions, loading} = useContext(AuctionsContext);
   return (
     <>
       <div className="max-w-4xl min-h-50 mx-auto ">
@@ -59,7 +21,7 @@ function Page() {
           Open Auctions
         </h1>
         <div className="grid grid-cols-2 mt-8 mb-4 gap-4 max-w-4xl mx-auto">
-          {activeAuctions.map((auction) => (
+          {loading ? "Loading..." : activeAuctions.map((auction) => (
             <>
               <AuctionCard
                 key={`${auction.auctionAddress}`}
@@ -80,7 +42,7 @@ function Page() {
           Past Auctions (Inactive)
         </h1>
         <div className="grid grid-cols-2 mt-8 mb-4 gap-4 max-w-4xl mx-auto">
-          {inactiveAuctions.map((auction) => (
+        {loading ? "Loading..." : inactiveAuctions.map((auction) => (
             <>
               <AuctionCard
                 key={`${auction.auctionAddress}`}
@@ -177,38 +139,5 @@ const AuctionCard = (
     </div >
   );
 };
-
-const auctions = [
-  {
-    tokenId: 26,
-    auctionAddress: AFROPOLITAN_ADDRESS,
-    imageUrl: "https://ipfs.io/ipfs/bafybeifcetut4fgnlmquws3c2jddt5i72vlculluw3tdyls7qiv2ixquum",
-    title: "Auction",
-    startBlock: 1,
-    endBlock: 100,
-    highestBid: ethers.utils.parseUnits("0.1", "ether").toString(),
-    bidIncrement: ethers.utils.parseUnits("0.11", "ether").toString(),
-  },
-  {
-    tokenId: 26,
-    auctionAddress: AFROPOLITAN_ADDRESS,
-    imageUrl: "https://ipfs.io/ipfs/bafybeid4blrpjudmqu7eborxklbnonoopqmm7opymlpfrgubw5ctt7m2c4",
-    title: "Auction",
-    startBlock: 1,
-    endBlock: 100,
-    highestBid: ethers.utils.parseUnits("0.2", "ether").toString(),
-    bidIncrement: ethers.utils.parseUnits("0.12", "ether").toString(),
-  },
-  {
-    tokenId: 26,
-    auctionAddress: AFROPOLITAN_ADDRESS,
-    imageUrl: "https://ipfs.io/ipfs/bafybeido3vjv6t2p7ijpdsa3qlpsejksv6js225g7bjt7zv67hfovjgqcq",
-    title: "Auction",
-    startBlock: 1,
-    endBlock: 100,
-    highestBid: ethers.utils.parseUnits("0.15", "ether").toString(),
-    bidIncrement: ethers.utils.parseUnits("0.15", "ether").toString(),
-  }
-]
 
 export default Page;

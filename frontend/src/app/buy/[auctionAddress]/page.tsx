@@ -1,8 +1,8 @@
 "use client";
 
 import Image from "next/image";
-import { ethers } from 'ethers';
-import { use, useEffect, useMemo, useState } from "react";
+import {ethers} from 'ethers';
+import { useContext, useEffect, useMemo, useState } from "react";
 import { Button } from "../../../components/Button";
 import { usePathname } from "next/navigation";
 import { useAccountOwnedByToken } from "../../../hooks/useAccountOwnedByToken";
@@ -15,45 +15,34 @@ import Link from "next/link";
 import { AUCTIONS, OPENSEA_URL } from "../../../utils/constants";
 import { Auction, HydratedAuction, hydrateAuction } from "../../../components/Auction";
 import { NFTList } from "../../../components/NFTList";
-
-const MOCK_AUCTION_DATA = {
-  state: "active",
-  highestBid: 400,
-  highestBidder: "0x123",
-};
-
-const READABLE_AUCTION_STATE = {
-  active: "Active",
-  canceled: "Canceled",
-  finalized: "Finalized",
-};
+import { AuctionsContext } from "../../../contexts/AuctionsContext";
 
 export function Page() {
+  const {activeAuctions, loading} = useContext(AuctionsContext);
   const pathName = usePathname();
   const auctionAddress = pathName.replace("/buy/", "");
-  const [auction, setAuction] = useState<HydratedAuction>();
-  useEffect(() => {
-    const getAuctionData = async () => {
-      const _auction = await hydrateAuction(auctionAddress);
-      setAuction(_auction as any)
-    }
-    getAuctionData()
-  }, [setAuction, auctionAddress])
 
-
-  // const auction = useMemo(() => AUCTIONS.find((auction) => auction.auctionAddress === auctionAddress), [auctionAddress])
+  const auction = useMemo(()=>activeAuctions.find((auction) => auction.auctionAddress === auctionAddress),[activeAuctions, auctionAddress])
   const [endTimestampEstimate, setEndTimestampEstimate] = useState(0);
 
   useEffect(() => {
     if (!auction) { return; }
     const getAuctionData = async () => {
       const provider = new ethers.providers.JsonRpcProvider(process.env.NEXT_PUBLIC_GOERLI_RPC_URL)
-      const startTimestamp = (await provider.getBlock(auction.startBlock)).timestamp;
-      const blockDiff = auction.endBlock - auction.startBlock;
-      setEndTimestampEstimate(blockDiff * 12 * 1000 + startTimestamp * 1000)
+      const startTimestamp = Number((await provider.getBlock("0x3888a1ae5be36e59d878e1d3df0b43050b5e10fa1389ca0760625c46e00128d0")).timestamp);
+      const blockDiff = Number(auction.endBlock) - Number(auction.startBlock);
+      setEndTimestampEstimate(blockDiff * 12 * 1000 + startTimestamp*1000)
     }
-    getAuctionData()
-  }, [setEndTimestampEstimate, auction])
+    if (!loading) {
+      getAuctionData()
+    }
+  },[setEndTimestampEstimate, auction, loading])
+
+  const { address } = useAccount();
+  const chainId = useChainId();
+
+  const [minBid, setMinBid] = useState(0);
+  const startAuction = async () => {};
 
   return (
     <div className=" min-h-screen">
@@ -64,13 +53,9 @@ export function Page() {
               <BiArrowBack /> Go back
             </div>
           </Link>
-          <h1 className="text-center text-2xl">Auction for {auction?.parentNFT.title} # {auction?.parentNFT.tokenId}</h1>
-          <div className="mx-auto max-w-3xl">
-            {auction ?
-              <Auction auction={auction} endTimestampEstimate={endTimestampEstimate} />
-              :
-              <div className="text-2xl my-10 justify-center">Loading...</div>}
-          </div>
+          <h1 className="text-center text-2xl">Auction for {auctionAddress}</h1>
+          <NFTList />
+          {loading ? "Loading..." : <Auction auction={auction} endTimestampEstimate={endTimestampEstimate}/>}
         </div>
       </div>
     </div>

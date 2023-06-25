@@ -4,5 +4,10 @@
       "address": "0xA23a9e6002Cebb284E1797be6E0Cad201d13C2F2",
       "startBlock": 17446991
     }
+  },
+  "goerli": {
+    "Contract": {
+      "address": "0xDD4e9331612E4d04244A33B5E6a2D25b42A7EdF7"
+    }
   }
 }

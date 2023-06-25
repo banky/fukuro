@@ -16,6 +16,7 @@ const client = new ApolloClient({
 });
 
 import { config } from "../wagmi";
+import { AuctionsProvider } from "../contexts/AuctionsProvider";
 
 export function Providers({ children }: { children: React.ReactNode }) {
   const [mounted, setMounted] = React.useState(false);
@@ -23,7 +24,7 @@ export function Providers({ children }: { children: React.ReactNode }) {
   return (
     <ApolloProvider client={client}>
       <WagmiConfig config={config}>
-        <ConnectKitProvider>{mounted && children}</ConnectKitProvider>
+        <ConnectKitProvider><AuctionsProvider>{mounted && children}</AuctionsProvider></ConnectKitProvider>
       </WagmiConfig>
     </ApolloProvider>
   );

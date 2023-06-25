@@ -25,3 +25,26 @@ dataSources:
         - event: Transfer(indexed address,indexed address,indexed uint256)
           handler: handleTransfer
       file: ./src/erc721.ts
+  - kind: ethereum
+    name: ERC721_1
+    network: goerli
+    source:
+      address: "0xDD4e9331612E4d04244A33B5E6a2D25b42A7EdF7"
+      abi: ERC721
+      startBlock: 9234180
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - Token
+        - Owner
+        - Contract
+        - Transfer
+      abis:
+        - name: ERC721
+          file: ./abis/ERC721.json
+      eventHandlers:
+        - event: Transfer(indexed address,indexed address,indexed uint256)
+          handler: handleTransfer
+      file: ./src/erc721.ts
